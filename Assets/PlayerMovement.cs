@@ -1,38 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController2D controller;
+    [SerializeField] private float _runSpeed = 40f;
+    [SerializeField] private CharacterController2D _controller;
+    public CharacterController2D Controller { get { return _controller; } }
+   
+    private float _horizontalMove;    
+    public float HorizontalMove { get { return _horizontalMove; } }
 
-    float horizontalMove = 0f;
-
-    public float runSpeed = 40f;
-
-    bool jump = false;
-
+    private bool _jump = false;
+     
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        _horizontalMove = Input.GetAxisRaw("Horizontal") * _runSpeed;
 
         if (Input.GetButtonDown("Jump"))
         {
-            jump = true;
-        }
+            _jump = true;
+        }        
     }
-
-    void Jump(InputAction.CallbackContext value)
+    private void Jump(InputAction.CallbackContext value)
     {
         Debug.Log(value.phase);
     }
-
     private void FixedUpdate()
     {
         //Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        jump = false;
+        _controller.Move(_horizontalMove * Time.fixedDeltaTime, false, _jump);
+        _jump = false;
     }
 }
