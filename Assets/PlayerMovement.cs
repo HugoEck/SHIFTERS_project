@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _runSpeed = 40f;
     [SerializeField] private CharacterController2D _controller;
+
+    public float KBForce;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
+
     public CharacterController2D Controller { get { return _controller; } }
    
     private float _horizontalMove;    
@@ -32,7 +39,27 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Move our character
-        _controller.Move(_horizontalMove * Time.fixedDeltaTime, false, _jump);
-        _jump = false;
+        
+        
+
+        if (KBCounter <= 0)
+        {
+            _controller.Move(_horizontalMove * Time.fixedDeltaTime, false, _jump);
+            _jump = false;
+        }
+
+        else
+        {
+            if (KnockFromRight == true)
+            {
+                Controller.M_RigidBody2D.velocity = new Vector2(-KBForce, KBForce);
+            }
+            if (KnockFromRight == false)
+            {
+                Controller.M_RigidBody2D.velocity = new Vector2(KBForce, KBForce);
+            }
+            KBCounter -= Time.deltaTime;
+
+        }
     }
 }
