@@ -10,13 +10,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _runSpeed = 40f;
     [SerializeField] private CharacterController2D _controller;
 
+    [SerializeField] private string inputMove = "Horizontal";
+    [SerializeField] public string inputJump = "Jump";
+    [SerializeField] public string inputWalljump = "Jump";
+
     public float KBForce;
     public float KBCounter;
     public float KBTotalTime;
     public bool KnockFromRight;
 
     public CharacterController2D Controller { get { return _controller; } }
-   
+
+    
+
+
     private float _horizontalMove;    
     public float HorizontalMove { get { return _horizontalMove; } }
 
@@ -25,9 +32,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        _horizontalMove = Input.GetAxisRaw("Horizontal") * _runSpeed;
+        _horizontalMove = Input.GetAxisRaw(inputMove) * _runSpeed;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown(inputJump))
         {
             _jump = true;
         }        

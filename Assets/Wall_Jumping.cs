@@ -18,6 +18,8 @@ public class Wall_Jumping : PlayerMovement
     private Vector2 _wallJumpingPower = new Vector2(8f, 16f);
 
     
+    public PlayerMovement playerMovement;
+    
 
     protected override void Update()
     {
@@ -55,7 +57,7 @@ public class Wall_Jumping : PlayerMovement
             _wallJumpingCounter -= Time.deltaTime;
         }
         
-        if(Input.GetButtonDown("Jump") && _wallJumpingCounter > 0 )
+        if(Input.GetButtonDown(playerMovement.inputWalljump) && _wallJumpingCounter > 0 )
         {
             _isWallJumping = true;
             Controller.M_RigidBody2D.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
