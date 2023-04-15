@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ColliderTest : MonoBehaviour
 {
-    public PlayerMovementTest playerMovement;
+    public PlayerMovement playerMovement;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.tag == "Player")
         {
             playerMovement.KBCounter = playerMovement.KBTotalTime;
+
             if (collision.transform.position.x <= transform.position.x)
             {
                 playerMovement.KnockFromRight = true;
