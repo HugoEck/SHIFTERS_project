@@ -18,11 +18,6 @@ public class PlayerMovementTest : MonoBehaviour
     private float JumpBufferTime = 0.2f;
     private float JumpBufferCount;
     private bool isJumping;
-
-
-
-
-
     
     private bool isWallJumping;
     private float wallJumpingDirection;

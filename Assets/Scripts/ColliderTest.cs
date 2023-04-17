@@ -10,21 +10,22 @@ public class ColliderTest : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "Player")
         {
-            playerMovement.KBCounter = playerMovement.KBTotalTime;
+            playerMovement.KnockbackCounter = playerMovement.KnockbackTotalTime;
 
             if (collision.transform.position.x <= transform.position.x)
             {
-                playerMovement.KnockFromRight = true;
+                playerMovement.KnockbackFromRight = true;
                 Debug.Log("Hit");
 
 
             }
             if (collision.transform.position.x > transform.position.x)
             {
-                playerMovement.KnockFromRight = false;
+                playerMovement.KnockbackFromRight = false;
                 Debug.Log("Hit");
 
             }
         }
     }
+    
 }

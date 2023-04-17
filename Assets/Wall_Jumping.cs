@@ -6,7 +6,7 @@ public class Wall_Jumping : PlayerMovement
 {
     
     [SerializeField]private float _wallSlidingSpeed = 1f;
-
+    
     private bool _isWallJumping;
     private bool _isWallSliding;
 
@@ -14,25 +14,32 @@ public class Wall_Jumping : PlayerMovement
     private float _wallJumpingTime = 0.2f;
     private float _wallJumpingCounter;
     private float _wallJumpingDuration = 0.4f;
+    
 
     private Vector2 _wallJumpingPower = new Vector2(8f, 16f);
 
-    
+    protected override void Awake()
+    {
+       
 
+    }
     protected override void Update()
     {
+        Debug.Log(_isWallSliding);
+        base.Update();
+
         WallSlide();
         WallJump();
        
     }
     private void WallSlide()
     {
-        if(Controller.IsWalled() && !Controller.M_Grounded)
+        if(IsWalled() && !m_Grounded)
         {
             _isWallSliding = true;
 
-            Controller.M_RigidBody2D.velocity = new Vector2(Controller.M_RigidBody2D.velocity.x,
-                Mathf.Clamp(Controller.M_RigidBody2D.velocity.y, -_wallSlidingSpeed, float.MaxValue));
+            _rigidBody2D.velocity = new Vector2(_rigidBody2D.velocity.x,
+                Mathf.Clamp(_rigidBody2D.velocity.y, -_wallSlidingSpeed, float.MaxValue));
         }
         else
         {
@@ -58,7 +65,7 @@ public class Wall_Jumping : PlayerMovement
         if(Input.GetButtonDown("Jump") && _wallJumpingCounter > 0 )
         {
             _isWallJumping = true;
-            Controller.M_RigidBody2D.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
+            _rigidBody2D.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
             _wallJumpingCounter = 0f;
 
             if(transform.localScale.x != _wallJumpingDirection)
@@ -72,7 +79,8 @@ public class Wall_Jumping : PlayerMovement
     {
         _isWallJumping = false;
     }
-    public void FixedUpdate()
+    protected override void FixedUpdate()
     {
+       
     }
 }

@@ -1122,7 +1122,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 271132275}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 98835caeaf4271b4892aca700a9e9d10, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -23030,9 +23030,10 @@ GameObject:
   - component: {fileID: 664284619}
   - component: {fileID: 664284618}
   - component: {fileID: 664284617}
+  - component: {fileID: 664284620}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Shapes
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23049,12 +23050,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea885651a68fd0438b83f505bf9ec02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runSpeed: 40
-  _controller: {fileID: 1552953258}
-  KBForce: 0
-  KBCounter: 0
-  KBTotalTime: 0
-  KnockFromRight: 0
+  m_MovementSmoothing: 0.05
+  m_AirControl: 1
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _rigidBody2D: {fileID: 1552953257}
+  _runSpeed: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
   _wallSlidingSpeed: 3
 --- !u!212 &664284618
 SpriteRenderer:
@@ -23123,6 +23133,37 @@ Transform:
   m_Father: {fileID: 1552953260}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664284620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664284616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebf13b8bb3c6b64cb0100d8bd2976bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 1430285476}
+  _ceilingCheck: {fileID: 1312239994}
+  _rigidBody2D: {fileID: 1552953257}
+  _runSpeed: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
+  _newMaxSpeed: 10
+  _newAccelerationForce: 15
+  _newJumpForce: 800
+  _newDeaccelerationForce: 5
 --- !u!1 &669515501
 GameObject:
   m_ObjectHideFlags: 0
@@ -24316,12 +24357,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea885651a68fd0438b83f505bf9ec02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  _wallCheck: {fileID: 0}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundCheck: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _rigidBody2D: {fileID: 0}
   _runSpeed: 40
-  _controller: {fileID: 1792708134}
-  KBForce: 0
-  KBCounter: 0
-  KBTotalTime: 0
-  KnockFromRight: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
   _wallSlidingSpeed: 3
 --- !u!212 &1250037681
 SpriteRenderer:
@@ -24418,7 +24468,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 1277583562}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5bd57f879c2009c4aacb7a489e72e58d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -69210,9 +69260,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1462343846}
   - component: {fileID: 1462343845}
+  - component: {fileID: 1462343847}
   m_Layer: 0
   m_Name: Triangle
-  m_TagString: Shapes
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69284,6 +69335,37 @@ Transform:
   m_Father: {fileID: 1552953260}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1462343847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462343844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebf13b8bb3c6b64cb0100d8bd2976bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 1430285476}
+  _ceilingCheck: {fileID: 1312239994}
+  _rigidBody2D: {fileID: 1552953257}
+  _runSpeed: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
+  _newMaxSpeed: 15
+  _newAccelerationForce: 20
+  _newJumpForce: 600
+  _newDeaccelerationForce: 5
 --- !u!1 &1552953252
 GameObject:
   m_ObjectHideFlags: 0
@@ -69294,7 +69376,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1552953260}
   - component: {fileID: 1552953259}
-  - component: {fileID: 1552953258}
   - component: {fileID: 1552953257}
   - component: {fileID: 1552953256}
   - component: {fileID: 1552953255}
@@ -69336,12 +69417,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ab03ec4ff649449a404070b5dfb003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 1
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 1430285476}
+  _ceilingCheck: {fileID: 1312239994}
+  _rigidBody2D: {fileID: 1552953257}
   _runSpeed: 200
-  _controller: {fileID: 1552953258}
-  KBForce: 5
-  KBCounter: 0
-  KBTotalTime: 0.25
-  KnockFromRight: 0
+  _knockbackForce: 5
+  _knockbackTotalTime: 0.28
 --- !u!58 &1552953255
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -69405,35 +69495,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1552953258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552953252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6986bb41c979742b01cc9d22ea4de5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_JumpForce: 800
-  m_CrouchSpeed: 0.36
-  m_MovementSmoothing: 0.05
-  m_AirControl: 1
-  m_WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  _wallCheck: {fileID: 869330351}
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  m_GroundCheck: {fileID: 1430285476}
-  m_CeilingCheck: {fileID: 1312239994}
-  m_CrouchDisableCollider: {fileID: 0}
-  m_AccelerationForce: 20
-  m_MaxSpeed: 15
-  m_DeaccelerationForce: 5
 --- !u!212 &1552953259
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -70006,7 +70067,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1792708133}
   - component: {fileID: 1792708140}
-  - component: {fileID: 1792708134}
   - component: {fileID: 1792708139}
   - component: {fileID: 1792708138}
   - component: {fileID: 1792708137}
@@ -70041,35 +70101,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1792708134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792708132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6986bb41c979742b01cc9d22ea4de5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_JumpForce: 800
-  m_CrouchSpeed: 0.36
-  m_MovementSmoothing: 0.05
-  m_AirControl: 1
-  m_WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  _wallCheck: {fileID: 1708973471}
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  m_GroundCheck: {fileID: 1757103254}
-  m_CeilingCheck: {fileID: 2109895045}
-  m_CrouchDisableCollider: {fileID: 0}
-  m_AccelerationForce: 20
-  m_MaxSpeed: 15
-  m_DeaccelerationForce: 5
 --- !u!114 &1792708135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70099,12 +70130,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ab03ec4ff649449a404070b5dfb003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  _wallCheck: {fileID: 0}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundCheck: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _rigidBody2D: {fileID: 0}
   _runSpeed: 200
-  _controller: {fileID: 1792708134}
-  KBForce: 0
-  KBCounter: 0
-  KBTotalTime: 0
-  KnockFromRight: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
 --- !u!58 &1792708137
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -70264,9 +70304,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1828841090}
   - component: {fileID: 1828841089}
+  - component: {fileID: 1828841091}
+  - component: {fileID: 1828841092}
   m_Layer: 0
   m_Name: Star
-  m_TagString: Shapes
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70344,6 +70386,65 @@ Transform:
   m_Father: {fileID: 1552953260}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1828841091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828841088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebf13b8bb3c6b64cb0100d8bd2976bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _rigidBody2D: {fileID: 1552953257}
+  _runSpeed: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
+  _newMaxSpeed: 20
+  _newAccelerationForce: 25
+  _newJumpForce: 800
+  _newDeaccelerationForce: 5
+--- !u!114 &1828841092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828841088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea885651a68fd0438b83f505bf9ec02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _rigidBody2D: {fileID: 1552953257}
+  _runSpeed: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
+  _wallSlidingSpeed: 3
 --- !u!1 &1846007883
 GameObject:
   m_ObjectHideFlags: 0
@@ -70675,9 +70776,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1967126490}
   - component: {fileID: 1967126489}
+  - component: {fileID: 1967126491}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Shapes
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70749,6 +70851,37 @@ Transform:
   m_Father: {fileID: 1552953260}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1967126491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967126488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebf13b8bb3c6b64cb0100d8bd2976bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  _wallCheck: {fileID: 869330351}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _groundCheck: {fileID: 1430285476}
+  _ceilingCheck: {fileID: 1312239994}
+  _rigidBody2D: {fileID: 1552953257}
+  _runSpeed: 0
+  _knockbackForce: 0
+  _knockbackTotalTime: 0
+  _newMaxSpeed: 20
+  _newAccelerationForce: 25
+  _newJumpForce: 0
+  _newDeaccelerationForce: 5
 --- !u!1 &2009549440
 GameObject:
   m_ObjectHideFlags: 0
