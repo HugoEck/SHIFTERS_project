@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController2D _controller;
     public CharacterController2D Controller { get { return _controller; } }
    
+    [SerializeField] private string inputNameHorizontal;
+   
     private float _horizontalMove;    
     public float HorizontalMove { get { return _horizontalMove; } }
 
@@ -18,7 +20,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        _horizontalMove = Input.GetAxisRaw("Horizontal") * _runSpeed;
+        _horizontalMove = Input.GetAxisRaw(inputNameHorizontal) * _runSpeed;
+
+        if (Mathf.Approximately(_horizontalMove, 0f))
+        {
+            _horizontalMove = Input.GetAxisRaw("Horizontal") * _runSpeed;
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
