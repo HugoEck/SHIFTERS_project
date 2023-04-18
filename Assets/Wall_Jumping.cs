@@ -62,7 +62,7 @@ public class Wall_Jumping : PlayerMovement
             _wallJumpingCounter -= Time.deltaTime;
         }
         
-        if(Input.GetButtonDown("Jump") && _wallJumpingCounter > 0 )
+        if(/*Input.GetButtonDown("Jump")*/ jumped && _wallJumpingCounter > 0 || spaceJump && _wallJumpingCounter > 0)
         {
             _isWallJumping = true;
             _rigidBody2D.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
