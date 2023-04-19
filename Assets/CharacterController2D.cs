@@ -15,6 +15,7 @@ public abstract class CharacterController2D : MonoBehaviour
     [SerializeField] protected Transform _ceilingCheck;                          // A position marking where to check for ceilings
     [SerializeField] protected Rigidbody2D _rigidBody2D;
 
+    protected bool _jump = false;
     protected float _jumpForce = 400f;                                           // Amount of force added when the player jumps.                
     protected float _accelerationForce;   
     protected float _maxSpeed;
@@ -101,6 +102,7 @@ public abstract class CharacterController2D : MonoBehaviour
         // If the player should jump...
         if (m_Grounded && jump)
         {
+            //_jump = true;
             // Add a vertical force to the player.
             m_Grounded = false;
             _rigidBody2D.AddForce(new Vector2(0f, _jumpForce));
