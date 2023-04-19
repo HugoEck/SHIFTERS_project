@@ -89,21 +89,21 @@ public class Shift_Shape : Shift_Shape_base
     public void OnSquare(InputAction.CallbackContext context)
     {
         shiftSquare = context.action.triggered;
-        Debug.Log(shiftSquare);
+        //Debug.Log(shiftSquare);
     }
     public void OnCircle(InputAction.CallbackContext context)
     {
         shiftCircle = context.action.triggered;
-        Debug.Log(shiftCircle);
+        //Debug.Log(shiftCircle);
     }
     public void OnTriangle(InputAction.CallbackContext context)
     {
         shiftTriangle = context.action.triggered;
-        Debug.Log(shiftTriangle);
+        //Debug.Log(shiftTriangle);
     }
     public void OnStar(InputAction.CallbackContext context)
     {
         shiftStar = context.action.triggered;
-        Debug.Log(shiftStar);
+        //Debug.Log(shiftStar);
     }
 }

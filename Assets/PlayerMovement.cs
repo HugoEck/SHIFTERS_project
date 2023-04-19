@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : CharacterController2D
@@ -16,13 +17,13 @@ public class PlayerMovement : CharacterController2D
     private float _knockbackCounter;
 
     public Vector2 inputMovement = Vector2.zero;
-    public bool jumped;
-    public bool moveLeft;
-    public bool moveRight;
-    public bool spaceJump;
+    protected bool jumped = false;
+    private bool moveLeft;
+    private bool moveRight;
+    private bool spaceJump;
     
 
-    protected bool _jump = false;
+    
     private bool knockbackFromRight;
     public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }  
     public float KnockbackCounter { get { return _knockbackCounter; } set { _knockbackCounter = value; } }  
@@ -32,6 +33,7 @@ public class PlayerMovement : CharacterController2D
 
     protected override void Awake()
     {
+        
         base.Awake();
     }
 
@@ -41,16 +43,19 @@ public class PlayerMovement : CharacterController2D
        
         _horizontalMove = /*Input.GetAxisRaw("Horizontal")*/inputMovement.x * _runSpeed;
         Vector2 move = new Vector2(inputMovement.x, inputMovement.y) * _runSpeed;
-
+        //Debug.Log(jumped);
         if (/*Input.GetButtonDown("Jump")*/  jumped || spaceJump)
         {
-            _jump = true;
-            Debug.Log(_jump);
+            
+            
+            //Debug.Log(_jump);
         }        
     }
-    private void Jump(InputAction.CallbackContext value)
+    public void Jump(InputAction.CallbackContext value)
     {
-        Debug.Log(value.phase);
+        //Debug.Log(value.phase);
+        
+        
     }
     protected override void FixedUpdate()
     {
@@ -59,8 +64,9 @@ public class PlayerMovement : CharacterController2D
         base.FixedUpdate();        
         if (_knockbackCounter <= 0)
         {
-            Move(_horizontalMove * Time.fixedDeltaTime, false, _jump);
-            _jump = false;
+            Move(_horizontalMove * Time.fixedDeltaTime, false, jumped);
+            
+            
         }        
         else
         {
@@ -123,9 +129,11 @@ public class PlayerMovement : CharacterController2D
         }
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public virtual void OnJump(InputAction.CallbackContext context)
     {
+        
         jumped = context.action.triggered;
+        
     }
 
     public void OnSpaceJump(InputAction.CallbackContext context)
