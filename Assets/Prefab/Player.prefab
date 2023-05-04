@@ -185,6 +185,7 @@ MonoBehaviour:
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
   _wallSlidingSpeed: 3
+  input: {fileID: 0}
 --- !u!96 &3994044877602057795
 TrailRenderer:
   serializedVersion: 2
@@ -405,19 +406,20 @@ MonoBehaviour:
   m_AirControl: 1
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   _wallCheck: {fileID: 227423476995853630}
   _wallLayer:
     serializedVersion: 2
     m_Bits: 64
-  _groundCheck: {fileID: 0}
-  _ceilingCheck: {fileID: 0}
+  _groundCheck: {fileID: 227423477263484694}
+  _ceilingCheck: {fileID: 227423478552159870}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 0
+  _runSpeed: 200
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
   _wallSlidingSpeed: 3
+  input: {fileID: 227423477254909303}
 --- !u!114 &227423477242574394
 MonoBehaviour:
   m_ObjectHideFlags: 0

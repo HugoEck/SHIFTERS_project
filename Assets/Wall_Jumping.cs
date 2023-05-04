@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,28 +8,29 @@ public class Wall_Jumping : PlayerMovement
 {
     
     [SerializeField]private float _wallSlidingSpeed = 1f;
+    [SerializeField] PlayerInput input;
     
     private bool _isWallJumping;
     private bool _isWallSliding;
-
+    public bool HasJumped { get; set; }
+    
     private float _wallJumpingDirection;
     private float _wallJumpingTime = 0.2f;
     private float _wallJumpingCounter;
     private float _wallJumpingDuration = 0.4f;
     
-
+    
     private Vector2 _wallJumpingPower = new Vector2(8f, 16f);
 
     protected override void Awake()
     {
-       
-
+        
     }
     protected override void Update()
     {
         //Debug.Log(_isWallSliding);
         base.Update();
-
+        
         WallSlide();
         WallJump();
        
@@ -50,7 +52,7 @@ public class Wall_Jumping : PlayerMovement
 
     private void WallJump()
     {
-        Debug.Log(_jump);
+        //Debug.Log(_jump);
         if (_isWallSliding)
         {
             _isWallJumping = false;
@@ -63,10 +65,10 @@ public class Wall_Jumping : PlayerMovement
         {
             _wallJumpingCounter -= Time.deltaTime;
         }
-        
-        if(Input.GetButtonDown("Jump") && _wallJumpingCounter > 0)
+        //Debug.Log(HasJumped());
+        if (HasJumped && _wallJumpingCounter > 0)
         {
-            Debug.Log(_jump);
+            //Debug.Log(_jump);
             _isWallJumping = true;
             _rigidBody2D.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
             _wallJumpingCounter = 0f;
@@ -84,11 +86,8 @@ public class Wall_Jumping : PlayerMovement
     }
     protected override void FixedUpdate()
     {
-       
+        
     }
-    public override void OnJump(InputAction.CallbackContext context)
-    {
-        jumped = context.action.triggered;
+   
 
-    }
 }

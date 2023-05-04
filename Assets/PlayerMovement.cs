@@ -11,19 +11,19 @@ public class PlayerMovement : CharacterController2D
     [SerializeField] protected float _runSpeed;
     [SerializeField] private float _knockbackForce;    
     [SerializeField] private float _knockbackTotalTime;
-
+    
+    private Wall_Jumping _wallJumping;
 
     protected float _horizontalMove;
     private float _knockbackCounter;
 
     public Vector2 inputMovement = Vector2.zero;
-    protected bool jumped = false;
+    private bool jumped;
     private bool moveLeft;
     private bool moveRight;
     private bool spaceJump;
-    
-
-    
+    public bool SpaceJump { get { return spaceJump; } } 
+        
     private bool knockbackFromRight;
     public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }  
     public float KnockbackCounter { get { return _knockbackCounter; } set { _knockbackCounter = value; } }  
@@ -32,15 +32,15 @@ public class PlayerMovement : CharacterController2D
 
 
     protected override void Awake()
-    {
-        
+    {        
         base.Awake();
     }
 
     // Update is called once per frame
     protected virtual void Update()
-    {
-       
+    {              
+        _wallJumping = Object.FindObjectOfType<Wall_Jumping>();
+        
         _horizontalMove = /*Input.GetAxisRaw("Horizontal")*/inputMovement.x * _runSpeed;
         Vector2 move = new Vector2(inputMovement.x, inputMovement.y) * _runSpeed;
         //Debug.Log(jumped);
@@ -55,18 +55,26 @@ public class PlayerMovement : CharacterController2D
     {
         //Debug.Log(value.phase);
         
-        
     }
     protected override void FixedUpdate()
     {
         //Move our character
         
-        base.FixedUpdate();        
+        base.FixedUpdate();
+        
         if (_knockbackCounter <= 0)
         {
-            Move(_horizontalMove * Time.fixedDeltaTime, false, jumped);
-            
-            
+            if (!spaceJump)
+            {
+                Move(_horizontalMove * Time.fixedDeltaTime, false, jumped);
+            }
+            else
+            {
+                Move(_horizontalMove * Time.fixedDeltaTime, false, spaceJump);
+            }
+
+            //Debug.Log(jumped);
+
         }        
         else
         {
@@ -133,11 +141,13 @@ public class PlayerMovement : CharacterController2D
     {
         
         jumped = context.action.triggered;
-        
+        _wallJumping.HasJumped = context.action.triggered;
     }
-
+    
     public void OnSpaceJump(InputAction.CallbackContext context)
     {
         spaceJump = context.action.triggered;
+        _wallJumping.HasJumped = context.action.triggered;
     }
+   
 }

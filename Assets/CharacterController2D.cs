@@ -105,6 +105,7 @@ public abstract class CharacterController2D : MonoBehaviour
             //_jump = true;
             // Add a vertical force to the player.
             m_Grounded = false;
+            
             _rigidBody2D.AddForce(new Vector2(0f, _jumpForce));
         }
     }

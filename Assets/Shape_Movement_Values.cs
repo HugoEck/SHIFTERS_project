@@ -11,8 +11,9 @@ public class Shape_Movement_Values : PlayerMovement
     [SerializeField] private float _newDeaccelerationForce;
     
     protected override void FixedUpdate()
-    {        
-        base.ChangeMovementValues(_newMaxSpeed, _newAccelerationForce, _newJumpForce, _newDeaccelerationForce);   
+    {               
+        base.ChangeMovementValues(_newMaxSpeed, _newAccelerationForce, _newJumpForce, _newDeaccelerationForce);
+        
     }
 
     protected override void Update()
