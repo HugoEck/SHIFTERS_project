@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -24,11 +25,36 @@ public class PlayerMovement : CharacterController2D
     private bool spaceJump;
     public bool SpaceJump { get { return spaceJump; } } 
         
+
+    //CAMERA
+    private CinemachineTargetGroup targetGroup;
+
+
+
     private bool knockbackFromRight;
     public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }  
     public float KnockbackCounter { get { return _knockbackCounter; } set { _knockbackCounter = value; } }  
     public float KnockbackTotalTime { get { return _knockbackTotalTime; } }    
     public bool KnockbackFromRight { get { return knockbackFromRight; } set { knockbackFromRight = value; } }
+
+    //CAMERA
+    void Start()
+    {
+        // Find the Target Group in the scene
+        targetGroup = GameObject.FindObjectOfType<CinemachineTargetGroup>();
+
+        // Add this player to the Target Group
+        targetGroup.AddMember(this.transform, 1f, 10f);
+    }
+    //CAMERA
+    void OnDestroy()
+    {
+        // Remove this player from the Target Group when it's destroyed
+        if (targetGroup != null)
+        {
+            targetGroup.RemoveMember(this.transform);
+        }
+    }
 
 
     protected override void Awake()
