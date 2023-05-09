@@ -90,6 +90,9 @@
                     "name": "MenuOpenClose",
                     "type": "Button",
                     "id": "fc88aa2d-fe5c-4045-945d-96b59d9eae92",
+                    "name": "Start_Game",
+                    "type": "Button",
+                    "id": "3e53e8a3-1f5b-4772-8d3a-569418676079",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -243,11 +246,13 @@
                 {
                     "name": "",
                     "id": "872e430d-431b-4821-8b75-8a26337f89ff",
+                    "id": "4240922e-3601-4a62-a7fb-0033d5522b67",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MenuOpenClose",
+                    "action": "Start_Game",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -270,6 +275,12 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuOpenClose",
+                    "id": "87b09c9d-e949-460d-9a3a-aceb3bdca712",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start_Game",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
