@@ -86455,6 +86455,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 227423477254909302, guid: a0190563cadc98e46a7ab557e572236f, type: 3}
+      propertyPath: countdownDuration
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 227423477254909303, guid: a0190563cadc98e46a7ab557e572236f, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 10
