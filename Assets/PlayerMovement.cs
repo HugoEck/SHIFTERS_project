@@ -30,6 +30,9 @@ public class PlayerMovement : CharacterController2D
     private CinemachineTargetGroup targetGroup;
 
 
+    private Transform currentCheckpoint;
+
+
 
     private bool knockbackFromRight;
     public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }  
@@ -45,7 +48,9 @@ public class PlayerMovement : CharacterController2D
 
         // Add this player to the Target Group
         targetGroup.AddMember(this.transform, 1f, 10f);
+
     }
+
     //CAMERA
     void OnDestroy()
     {

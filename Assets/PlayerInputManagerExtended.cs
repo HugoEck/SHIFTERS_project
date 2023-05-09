@@ -10,6 +10,8 @@ public class PlayerInputManagerExtended : MonoBehaviour
     public GameObject playerPrefab;
     public Transform spawnPoint;
     public CinemachineTargetGroup targetGroup;
+
+
     private void Start()
     {
         targetGroup.m_Targets = new CinemachineTargetGroup.Target[4];
@@ -30,6 +32,4 @@ public class PlayerInputManagerExtended : MonoBehaviour
             }
         }
     }
-
-
 }
