@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227423476995853630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 227423477156398671}
   - component: {fileID: 227423477156398640}
   - component: {fileID: 3994044877602057795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 227423477242574393}
   - component: {fileID: 227423477242574394}
   - component: {fileID: 2775845491467978216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
@@ -580,12 +580,12 @@ GameObject:
   - component: {fileID: 227423477254909296}
   - component: {fileID: 227423477254909297}
   - component: {fileID: 227423477254909298}
-  - component: {fileID: 227423477254909299}
-  - component: {fileID: 227423477254909300}
   - component: {fileID: 227423477254909301}
   - component: {fileID: 227423477254909302}
   - component: {fileID: 227423477254909303}
-  m_Layer: 0
+  - component: {fileID: -4377287571221237407}
+  - component: {fileID: 2456609849023059686}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -687,48 +687,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &227423477254909299
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227423477254909304}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.20987967}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.58024067}
-  m_EdgeRadius: 0
---- !u!58 &227423477254909300
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227423477254909304}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &227423477254909301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,11 +905,59 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6f0666be-15aa-4394-b414-4de27413a9f3
     m_ActionName: Controls/Star[/DualShock4GamepadHID/rightTrigger,/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 227423477254909301}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3e53e8a3-1f5b-4772-8d3a-569418676079
+    m_ActionName: Controls/Start_Game[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!58 &-4377287571221237407
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227423477254909304}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &2456609849023059686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227423477254909304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624d74104c9998a4f811f6003b6864e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _bShouldDestroy: 0
 --- !u!1 &227423477263484695
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227423477263484694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Groundcheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,7 +999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477297882673}
   - component: {fileID: 227423477297882672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,7 +1085,7 @@ GameObject:
   - component: {fileID: 227423477640983676}
   - component: {fileID: 227423477640983677}
   - component: {fileID: 236849195236703067}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1226,7 +1232,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
@@ -1314,7 +1320,7 @@ GameObject:
   - component: {fileID: 227423477841511492}
   - component: {fileID: 227423477841511493}
   - component: {fileID: 6040817098940206128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1461,7 +1467,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
@@ -1547,7 +1553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477940653158}
   - component: {fileID: 227423477940653157}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1631,7 +1637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477941521722}
   - component: {fileID: 227423477941521721}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1715,7 +1721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477983940299}
   - component: {fileID: 227423477983940298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1799,7 +1805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423478157219652}
   - component: {fileID: 227423478157219651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1883,7 +1889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423478354931342}
   - component: {fileID: 227423478354931341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1966,7 +1972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227423478552159870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
