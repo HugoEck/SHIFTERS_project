@@ -18,6 +18,16 @@ public class Shift_Shape : Shift_Shape_base
     public bool shiftCircle;
     public bool shiftTriangle;
     public bool shiftStar;
+
+    private bool isCountdownActive = false;
+    private float countdownTimer = 0f;
+    private float cooldownTimer = 0f;
+    public const float countdownDuration = 5f;
+    public const float cooldownDuration = 15f;
+    private bool isCooldownActive = false;
+    private bool isStarActive = false;
+    private bool canShiftToStar = true;
+
     protected override void Start()
     {
         shapes[2].SetActive(false);
@@ -33,6 +43,30 @@ public class Shift_Shape : Shift_Shape_base
     // Update is called once per frame
     protected override void Update()
     {
+        if (isCountdownActive)
+        {
+            countdownTimer += Time.deltaTime;
+            if (countdownTimer >= countdownDuration)
+            {
+                countdownTimer = 0f;
+                isCountdownActive = false;
+                ShiftToCircle();
+                isCooldownActive = true;
+                cooldownTimer = cooldownDuration;
+                StartCoroutine(DisableCooldownAfterDelay());
+            }
+        }
+        if (isCooldownActive)
+        {
+            // Check if cooldown has ended
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0f)
+            {
+                cooldownTimer = 0f;
+                isCooldownActive = false;
+            }
+        }
+
         if (shiftSquare)
         {
 
@@ -74,12 +108,19 @@ public class Shift_Shape : Shift_Shape_base
     }
     private void ActivateShape(int active, int notActive1, int notActive2, int notActive3)
     {
-        if (/*Input.GetKeyDown(key)*/shiftSquare || shiftCircle || shiftTriangle || shiftStar)
+        if (isCountdownActive || (isCooldownActive && isStarActive) || (isCooldownActive && active == 3 && !canShiftToStar))
+            return;
+
+        shapes[active].SetActive(true);
+        shapes[notActive1].SetActive(false);
+        shapes[notActive2].SetActive(false);
+        shapes[notActive3].SetActive(false);
+
+        if (active == 3)
         {
-            shapes[active].SetActive(true);
-            shapes[notActive1].SetActive(false);
-            shapes[notActive2].SetActive(false);
-            shapes[notActive3].SetActive(false);
+            isStarActive = true;
+            isCountdownActive = true;
+            canShiftToStar = false;
         }
     }
 
@@ -104,6 +145,30 @@ public class Shift_Shape : Shift_Shape_base
     public void OnStar(InputAction.CallbackContext context)
     {
         shiftStar = context.action.triggered;
+
         //Debug.Log(shiftStar);
+    }
+    private void ShiftToCircle()
+    {
+        ActivateShape(0, 1, 2, 3);
+
+        isStarActive = false;
+        isCountdownActive = false;
+        countdownTimer = 0f;
+        cooldownTimer = cooldownDuration;
+
+        // Reset other shift flags
+        shiftSquare = false;
+        shiftTriangle = false;
+        shiftStar = false;
+
+    }
+    private System.Collections.IEnumerator DisableCooldownAfterDelay()
+    {
+        yield return new WaitForSeconds(cooldownDuration);
+
+        isCooldownActive = false;
+
+        yield break;
     }
 }
