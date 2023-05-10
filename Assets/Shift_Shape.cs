@@ -30,8 +30,6 @@ public class Shift_Shape : Shift_Shape_base
 
     protected override void Start()
     {
-        currentShapeState = new Shape_Enum();
-        
         shapes[2].SetActive(false);
         shapes[1].SetActive(false);
         shapes[0].SetActive(false);
@@ -40,23 +38,6 @@ public class Shift_Shape : Shift_Shape_base
         randomShapeNumber = random.Next(0, 3);
 
         shapes[randomShapeNumber].SetActive(true);
-
-        if (shapes[0].activeSelf)
-        {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
-        }
-        else if (shapes[1].activeSelf)
-        { 
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square; 
-        }
-        else if (shapes[2].activeSelf)
-        {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Triangle;
-        }
-        else if (shapes[3].activeSelf)
-        {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Star;
-        }
     }
 
     // Update is called once per frame
@@ -88,22 +69,22 @@ public class Shift_Shape : Shift_Shape_base
 
         if (shiftSquare)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square;
+
             Square();
         }
         if (shiftTriangle)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Triangle;
+
             Triangle();
         }
         if (shiftCircle)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square;
+
             Circle();
         }
         if (shiftStar)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Star;
+
             Star();
         }
     }

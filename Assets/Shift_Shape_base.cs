@@ -11,8 +11,6 @@ public abstract class Shift_Shape_base : MonoBehaviour
     
     protected int randomShapeNumber;
 
-    public Shape_Enum currentShapeState { get; protected set; }
-
     protected virtual void Start()
     {
         

@@ -17,17 +17,13 @@ public class PlayerMovement : CharacterController2D
 
     protected float _horizontalMove;
     private float _knockbackCounter;
-    private float _currentPlayerDazedTime = 0f;
-    private float _startingPlayerDazedTime = 2f;
 
     public Vector2 inputMovement = Vector2.zero;
     private bool jumped;
     private bool moveLeft;
     private bool moveRight;
     private bool spaceJump;
-    public bool SpaceJump { get { return spaceJump; } }
-
-    public bool bIsGameStarted { get; set; } = false;  // Only used for starting the game from lobby scene
+    public bool SpaceJump { get { return spaceJump; } } 
         
 
     //CAMERA
@@ -99,13 +95,6 @@ public class PlayerMovement : CharacterController2D
         
         if (_knockbackCounter <= 0)
         {
-            _currentPlayerDazedTime -= 1 * Time.deltaTime;
-
-            if(_currentPlayerDazedTime > 0) // If player has collided with another player they are slowed for 2 seconds by maxSpeed / 3
-            {
-                _maxSpeed /= 3;
-            }
-
             if (!spaceJump)
             {
                 Move(_horizontalMove * Time.fixedDeltaTime, false, jumped);
@@ -115,11 +104,11 @@ public class PlayerMovement : CharacterController2D
                 Move(_horizontalMove * Time.fixedDeltaTime, false, spaceJump);
             }
 
+            //Debug.Log(jumped);
+
         }        
         else
         {
-            _currentPlayerDazedTime = _startingPlayerDazedTime;
-
             if (knockbackFromRight == true)
             {
                 _rigidBody2D.velocity = new Vector2(-_knockbackForce, _knockbackForce);
@@ -191,10 +180,5 @@ public class PlayerMovement : CharacterController2D
         spaceJump = context.action.triggered;
         _wallJumping.HasJumped = context.action.triggered;
     }
-
-    public void StartGame(InputAction.CallbackContext context)
-    {
-        bIsGameStarted = context.action.triggered;
-    }
-
+   
 }
