@@ -52,7 +52,7 @@ public class PlayerMovement : CharacterController2D
 
         // Add this player to the Target Group
         targetGroup.AddMember(this.transform, 1f, 10f);
-
+        
     }
 
     //CAMERA
@@ -73,9 +73,9 @@ public class PlayerMovement : CharacterController2D
 
     // Update is called once per frame
     protected virtual void Update()
-    {              
-        _wallJumping = Object.FindObjectOfType<Wall_Jumping>();
+    {
         
+
         _horizontalMove = /*Input.GetAxisRaw("Horizontal")*/inputMovement.x * _runSpeed;
         Vector2 move = new Vector2(inputMovement.x, inputMovement.y) * _runSpeed;
         //Debug.Log(jumped);
@@ -94,7 +94,7 @@ public class PlayerMovement : CharacterController2D
     protected override void FixedUpdate()
     {
         //Move our character
-        
+        _wallJumping = GetComponentInChildren<Wall_Jumping>();
         base.FixedUpdate();
         
         if (_knockbackCounter <= 0)

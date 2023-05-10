@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227423476995853630}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wall Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 227423477156398669}
   - component: {fileID: 227423477156398670}
   - component: {fileID: 3994044877602057795}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 227423477242574391}
   - component: {fileID: 227423477242574392}
   - component: {fileID: 2775845491467978216}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 3164432547734398546}
   - component: {fileID: 6571686821441735442}
   - component: {fileID: -7727550655145952019}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Falling_Dummy
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collisionLayer:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 640
   _bShouldDestroy: 1
 --- !u!114 &-7727550655145952019
 MonoBehaviour:
@@ -671,7 +671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227423477263484694}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Groundcheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477297882673}
   - component: {fileID: 227423477297882672}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 227423477640983675}
   - component: {fileID: 227423477640983676}
   - component: {fileID: 236849195236703067}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +990,7 @@ GameObject:
   - component: {fileID: 227423477841511491}
   - component: {fileID: 227423477841511492}
   - component: {fileID: 6040817098940206128}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,7 +1191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477940653158}
   - component: {fileID: 227423477940653157}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477941521722}
   - component: {fileID: 227423477941521721}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1359,7 +1359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423477983940299}
   - component: {fileID: 227423477983940298}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1443,7 +1443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423478157219652}
   - component: {fileID: 227423478157219651}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1527,7 +1527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227423478354931342}
   - component: {fileID: 227423478354931341}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1610,7 +1610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227423478552159870}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
