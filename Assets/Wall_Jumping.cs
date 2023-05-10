@@ -8,7 +8,6 @@ public class Wall_Jumping : PlayerMovement
 {
     
     [SerializeField]private float _wallSlidingSpeed = 1f;
-    [SerializeField] PlayerInput input;
     
     private bool _isWallJumping;
     private bool _isWallSliding;
