@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Shapes
-  - Ground
-  - Weak Point
-  - FinishLine
-  - CheckPoint
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -16,10 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Wall
-  - Ground
-  - ReadyButton
-  - Player
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -583,11 +583,14 @@ GameObject:
   - component: {fileID: 227423477254909301}
   - component: {fileID: 227423477254909302}
   - component: {fileID: 227423477254909303}
+<<<<<<< HEAD
   - component: {fileID: 3343588930653493571}
   m_Layer: 0
+=======
   - component: {fileID: -4377287571221237407}
   - component: {fileID: 2456609849023059686}
   m_Layer: 8
+>>>>>>> Arns-Branch-Main-Menu-And-Lobby
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -689,6 +692,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+<<<<<<< HEAD
 --- !u!61 &227423477254909299
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -731,6 +735,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+=======
+>>>>>>> Arns-Branch-Main-Menu-And-Lobby
 --- !u!114 &227423477254909301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +976,10 @@ MonoBehaviour:
   m_DefaultActionMap: Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+<<<<<<< HEAD
 --- !u!114 &3343588930653493571
+=======
+--- !u!58 &-4377287571221237407
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -986,6 +995,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &2456609849023059686
+>>>>>>> Arns-Branch-Main-Menu-And-Lobby
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -994,6 +1005,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 227423477254909304}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: 1fe61ccae9de2394999c89a326d61c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -1001,6 +1013,7 @@ MonoBehaviour:
   checkpointsPassed: 0
   totalCheckpoints: 1
   lapsToWin: 2
+=======
   m_Script: {fileID: 11500000, guid: 624d74104c9998a4f811f6003b6864e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -1008,6 +1021,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _bShouldDestroy: 0
+>>>>>>> Arns-Branch-Main-Menu-And-Lobby
 --- !u!1 &227423477263484695
 GameObject:
   m_ObjectHideFlags: 0
