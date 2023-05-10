@@ -40,7 +40,7 @@ public class Player_Spawn_Manager : MonoBehaviour
         {
             PlayerMovement playerMovement = players.GetComponent<PlayerMovement>();
 
-            if (_activePlayers.Count > 0)
+            if (_activePlayers.Count > 1)
             {
                 _startGameText.enabled = true;
                 _startGameText.text = "PRESS 'X' OR 'START' TO START THE GAME: " + _activePlayers.Count + "/4 players";
