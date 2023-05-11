@@ -66,7 +66,7 @@ public class PlayerMovement : CharacterController2D
     protected virtual void Update()
     {              
         _wallJumping = Object.FindObjectOfType<Wall_Jumping>();
-        
+        inputMovement = Gamepad.current != null ? Gamepad.current.leftStick.ReadValue() : Vector2.zero;
         _horizontalMove = /*Input.GetAxisRaw("Horizontal")*/inputMovement.x * _runSpeed;
         Vector2 move = new Vector2(inputMovement.x, inputMovement.y) * _runSpeed;
         //Debug.Log(jumped);
@@ -125,9 +125,35 @@ public class PlayerMovement : CharacterController2D
     }
 
     //Metoder till nya input systemets inputActions
-    public void OnMove(InputAction.CallbackContext context)
+    //public void OnMove(InputAction.CallbackContext context)
+    //{
+    //    inputMovement = context.ReadValue<Vector2>();
+    //}
+
+    public void OnLeftStickLeft(InputAction.CallbackContext context)
     {
-        inputMovement = context.ReadValue<Vector2>();
+        inputMovement.x = -1;
+    }
+
+    public void OnLeftStickRight(InputAction.CallbackContext context)
+    {
+        inputMovement.x = 1;
+    }
+
+    public void OnLeftStickLeftRelease(InputAction.CallbackContext context)
+    {
+        if (inputMovement.x == -1)
+        {
+            inputMovement.x = 0;
+        }
+    }
+
+    public void OnLeftStickRightRelease(InputAction.CallbackContext context)
+    {
+        if (inputMovement.x == 1)
+        {
+            inputMovement.x = 0;
+        }
     }
 
     public void OnLeft(InputAction.CallbackContext context)
