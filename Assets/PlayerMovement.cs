@@ -79,9 +79,6 @@ public class PlayerMovement : CharacterController2D
 
     // Update is called once per frame
     protected virtual void Update()
-    {
-        
-
     {              
         _wallJumping = Object.FindObjectOfType<Wall_Jumping>();
         inputMovement = Gamepad.current != null ? Gamepad.current.leftStick.ReadValue() : Vector2.zero;
@@ -94,11 +91,6 @@ public class PlayerMovement : CharacterController2D
             
             //Debug.Log(_jump);
         }        
-    }
-    public void Jump(InputAction.CallbackContext value)
-    {
-        //Debug.Log(value.phase);
-        
     }
     protected override void FixedUpdate()
     {
