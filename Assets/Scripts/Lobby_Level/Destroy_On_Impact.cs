@@ -8,15 +8,15 @@ public class Destroy_On_Impact : MonoBehaviour
 {
     private List<Shift_Shape> _playerObjects = new List<Shift_Shape>();
     private List<GameObject> _playerList = new List<GameObject>();
-    private Shift_Shape[] _accessShapeEnums;
-
-    private Shift_Shape _accessThisShapeEnum;
+    private Shift_Shape[] _accessShapeEnums;   
 
     private PlayerMovement _thisPlayer;
     private GameObject _otherPlayer;
 
     [SerializeField] private LayerMask _collisionLayer;
     [SerializeField] private bool _bShouldDestroy;
+    public bool BShouldDestroy { get { return _bShouldDestroy; } }
+
     private bool _bBeingDestroyed = false;
     private bool _bHasAlreadyCollided = false;
     private bool _bIsDazed = false;
@@ -28,8 +28,7 @@ public class Destroy_On_Impact : MonoBehaviour
 
     private void Start()
     {
-        _thisPlayer = gameObject.GetComponent<PlayerMovement>();
-        _accessThisShapeEnum = gameObject.GetComponent<Shift_Shape>();
+        _thisPlayer = gameObject.GetComponent<PlayerMovement>();        
         StartCoroutine(FindPlayers());
     }
     private IEnumerator FindPlayers()
@@ -65,10 +64,6 @@ public class Destroy_On_Impact : MonoBehaviour
     }
     private void Update() 
     {
-        if(_otherPlayer != null)
-        {
-            IgnoreCollision();
-        }
         
         if(_bBeingDestroyed)   // Only used for falling lobby dummy
         {
@@ -78,18 +73,7 @@ public class Destroy_On_Impact : MonoBehaviour
              {
                    Destroy(gameObject);
              }
-        }
-
-        if(_bIsDazed)
-        {
-           _currentDazedTimer -= 1 * Time.deltaTime;
-            
-           if (_currentDazedTimer <= 0)
-           {
-                _bIsDazed = false;
-                _bHasAlreadyCollided = false;               
-           }
-        }
+        }      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -97,41 +81,57 @@ public class Destroy_On_Impact : MonoBehaviour
         // Check if the collision layer is included in the allowed collision layer mask
         if (((1 << collision.gameObject.layer) & _collisionLayer) != 0)
         {
-
-            Vector2 raycastOrigin = transform.position + new Vector3(0f, transform.localScale.y, 0f);
-
-            // Cast a raycast directly downwards, with a length of 20.0 units (NOT USED FOR STAR SHAPE)
-            RaycastHit2D normalHit = Physics2D.Raycast(raycastOrigin, Vector2.up, 20.0f);
-
-            // Check if the raycast hits object from below
-            if(_bShouldDestroy && !_bHasAlreadyCollided)
-            {
-                if (normalHit.collider != null && normalHit.collider.gameObject == collision.gameObject)
-                {
-                    _bHasAlreadyCollided = true;
-                    _bBeingDestroyed = true;
-                    _currentDestroyObjectTimer = _startingDestroyObjectTimer;
-                }
-            }
             
             foreach (Shift_Shape shiftShape in _accessShapeEnums)
             {
                 
                 foreach (GameObject playerObject in _playerList)
                 {
-
-                    PlayerMovement playerMovement = playerObject.GetComponent<PlayerMovement>();
-                    if (playerMovement == null || playerObject == this.gameObject)
+                    if (collision.gameObject.CompareTag("Ground"))
                     {
-                        continue;
+                        if (_bShouldDestroy && !_bHasAlreadyCollided)
+                        {
+                            _bBeingDestroyed = true;
+                            _currentDestroyObjectTimer = _startingDestroyObjectTimer;
+                            return;
+                        }
                     }
 
+                    if (shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Triangle)
+                    {
+                        if (shiftShape.gameObject == collision.gameObject)
+                        {
+                            _otherPlayer = collision.gameObject;
+                            if (_bShouldDestroy && !_bHasAlreadyCollided)
+                            {
+                                _bBeingDestroyed = true;
+                                _currentDestroyObjectTimer = _startingDestroyObjectTimer;
+                            }
+
+                            _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
+
+                            if (collision.transform.position.x <= gameObject.transform.position.x)
+                            {
+                                _thisPlayer.KnockbackFromRight = true;                               
+                            }
+                            if (collision.transform.position.x > gameObject.transform.position.x)
+                            {
+                                _thisPlayer.KnockbackFromRight = false;                                
+                            }                            
+                            // Ignore collision between _thisPlayer and _otherPlayer
+                            Physics2D.IgnoreCollision(_thisPlayer.GetComponent<CircleCollider2D>(), _otherPlayer.GetComponent<CircleCollider2D>(), true);
+
+                             // Set a timer to turn off the collision ignoring after a certain amount of time
+                            StartCoroutine(ResetCollisionIgnore());                         
+                            return;                            
+                        }
+                    }
                     // If the other shape is a star that you collide with, you get the slowdown and knockback effect
                     if (shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Star)
                     {
                         if (shiftShape.gameObject == collision.gameObject)
                         {
-                            GameObject otherPlayer = collision.gameObject;
+                            _otherPlayer = collision.gameObject;
                             if (_bShouldDestroy && !_bHasAlreadyCollided)
                             {
                                 _bBeingDestroyed = true;
@@ -150,87 +150,22 @@ public class Destroy_On_Impact : MonoBehaviour
                                 _thisPlayer.KnockbackFromRight = false;
                                 Debug.Log("Knock from left");
                             }
-                            StartDazedTimer();
-                            _otherPlayer = otherPlayer;
-                            break;
+                            // Ignore collision between _thisPlayer and _otherPlayer
+                            Physics2D.IgnoreCollision(_thisPlayer.GetComponent<CircleCollider2D>(), _otherPlayer.GetComponent<CircleCollider2D>(), true);
+
+                            // Set a timer to turn off the collision ignoring after a certain amount of time
+                            StartCoroutine(ResetCollisionIgnore());
+                            return;                           
                         }
-                    }
-                    
-                    // Only collide if the collision happens from underneath
-                    if (normalHit.collider != null && normalHit.collider.gameObject == collision.gameObject)
-                    {                        
-                        if (shiftShape.gameObject == collision.gameObject)
-                        {   
-                            // If this.gameobject isn't star or triangle. this.gameobject recieves a knockback and slow
-                            if (_accessThisShapeEnum.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Triangle 
-                                || _accessThisShapeEnum.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Star)
-                            {
-                                GameObject otherPlayer = collision.gameObject;
-                                PlayerMovement otherPlayerMovement = shiftShape.gameObject.GetComponent<PlayerMovement>();
-                                if (_bShouldDestroy && !_bHasAlreadyCollided)
-                                {
-                                    _bBeingDestroyed = true;
-                                    _currentDestroyObjectTimer = _startingDestroyObjectTimer;
-                                }
-
-                                otherPlayerMovement.KnockbackCounter = otherPlayerMovement.KnockbackTotalTime;
-
-                                if (collision.transform.position.x <= gameObject.transform.position.x)
-                                {
-                                    otherPlayerMovement.KnockbackFromRight = true;
-                                }
-                                if (collision.transform.position.x > gameObject.transform.position.x)
-                                {
-                                    otherPlayerMovement.KnockbackFromRight = false;
-                                }
-                                StartDazedTimer();
-                                _otherPlayer = otherPlayer;
-                                break;
-                            }
-                            else // If this.Gameobject is star or triangle the other player recieves a knockback
-                            {
-                                GameObject otherPlayer = collision.gameObject;
-                                _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
-                                if (collision.transform.position.x <= playerObject.transform.position.x)
-                                {
-                                    _thisPlayer.KnockbackFromRight = true;
-                                    Debug.Log("Hit From Right");
-                                }
-                                if (collision.transform.position.x > playerObject.transform.position.x)
-                                {
-                                    _thisPlayer.KnockbackFromRight = false;
-                                    Debug.Log("Hit From Left");
-                                }
-                                StartDazedTimer();
-                                _otherPlayer = otherPlayer;
-                                break;
-                            }                            
-                        }                        
-                    }                    
+                        
+                    }                     
                 }                
             }
         }
-    }
-    private void IgnoreCollision()
+    }   
+    private IEnumerator ResetCollisionIgnore()
     {
-        if(_bIsDazed)
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), _otherPlayer.GetComponent<CircleCollider2D>());
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), _otherPlayer.GetComponent<BoxCollider2D>());
-        }
-        else
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), _otherPlayer.GetComponent<CircleCollider2D>(), false);
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), _otherPlayer.GetComponent<BoxCollider2D>(), false);
-        }
-    }
-    private void StartDazedTimer()
-    {
-        if (!_bHasAlreadyCollided)
-        {
-            _currentDazedTimer = _startingDazedTimer;
-            _bIsDazed = true;
-            _bHasAlreadyCollided = true;
-        }
+        yield return new WaitForSeconds(2f); // Change this value to the desired amount of time
+        Physics2D.IgnoreCollision(_thisPlayer.GetComponent<Collider2D>(), _otherPlayer.GetComponent<Collider2D>(), false);
     }
 }

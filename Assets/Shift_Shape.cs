@@ -98,7 +98,7 @@ public class Shift_Shape : Shift_Shape_base
         }
         if (shiftCircle)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square;
+            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
             Circle();
         }
         if (shiftStar)
@@ -170,7 +170,7 @@ public class Shift_Shape : Shift_Shape_base
     private void ShiftToCircle()
     {
         ActivateShape(0, 1, 2, 3);
-
+        currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
         isStarActive = false;
         isCountdownActive = false;
         countdownTimer = 0f;
@@ -180,6 +180,7 @@ public class Shift_Shape : Shift_Shape_base
         shiftSquare = false;
         shiftTriangle = false;
         shiftStar = false;
+        
 
     }
     private System.Collections.IEnumerator DisableCooldownAfterDelay()

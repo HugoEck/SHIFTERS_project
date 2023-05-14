@@ -52,7 +52,14 @@ public class Wall_Jumping : PlayerMovement
 
     private void WallJump()
     {
-        //Debug.Log(_jump);
+        // Determine wall direction
+        int wallDirection = 0;
+        if (IsWalled() && !m_Grounded)
+        {
+            wallDirection = (int)Mathf.Sign(_wallCheck.transform.position.x - transform.position.x);
+        }
+
+        // Perform wall jump
         if (_isWallSliding)
         {
             _isWallJumping = false;
@@ -65,18 +72,14 @@ public class Wall_Jumping : PlayerMovement
         {
             _wallJumpingCounter -= Time.deltaTime;
         }
-        //Debug.Log(HasJumped());
+
         if (HasJumped && _wallJumpingCounter > 0)
         {
-            //Debug.Log(_jump);
             _isWallJumping = true;
-            _rigidBody2D.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
+            float wallJumpingPowerX = _wallJumpingPower.x * wallDirection * -1f; // Reverse X power if wallDirection is negative
+            _rigidBody2D.velocity = new Vector2(wallJumpingPowerX, _wallJumpingPower.y);
             _wallJumpingCounter = 0f;
 
-            if(transform.localScale.x != _wallJumpingDirection)
-            {
-
-            }
             Invoke(nameof(StopWallJumping), _wallJumpingDuration);
         }
     }

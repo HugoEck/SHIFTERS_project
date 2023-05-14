@@ -9,6 +9,8 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class Player_Spawn_Manager : MonoBehaviour
 {
+    private int _randomizeMapSelection;
+
     private List<int> _activePlayers;
 
     [SerializeField] private TextMeshProUGUI _startGameText;
@@ -17,6 +19,8 @@ public class Player_Spawn_Manager : MonoBehaviour
 
     private List<GameObject> _playerObjects = new List<GameObject>();
 
+    public int PlayerID { get; private set; }
+    
     private IEnumerator WaitForPlayer()
     {
         while (true)
@@ -36,17 +40,18 @@ public class Player_Spawn_Manager : MonoBehaviour
     
     public void Update()
     {
-        foreach(GameObject players in _playerObjects)
+        
+        foreach (GameObject players in _playerObjects)
         {
             PlayerMovement playerMovement = players.GetComponent<PlayerMovement>();
 
-            if (_activePlayers.Count > 1)
+            if (_activePlayers.Count > 0)
             {
                 _startGameText.enabled = true;
                 _startGameText.text = "PRESS 'X' OR 'START' TO START THE GAME: " + _activePlayers.Count + "/4 players";
                 if (playerMovement.bIsGameStarted)
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                {                    
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Random.Range(1, 6));
                 }
             }            
         }        
@@ -56,6 +61,7 @@ public class Player_Spawn_Manager : MonoBehaviour
         _playerOneAccess = (PlayerInput)playerInput;
         Debug.Log("Player Input ID: " + playerInput.playerIndex);
         _activePlayers.Add(playerInput.playerIndex);
-        
+
+        PlayerID = playerInput.playerIndex;
     }    
 }
