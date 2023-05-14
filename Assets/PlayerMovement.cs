@@ -15,6 +15,8 @@ public class PlayerMovement : CharacterController2D
     
     private Wall_Jumping _wallJumping;
 
+    private Destroy_On_Impact _destroyOnImpact;
+
     protected float _horizontalMove;
     private float _knockbackCounter;
     private float _currentPlayerDazedTime = 0f;
@@ -49,9 +51,13 @@ public class PlayerMovement : CharacterController2D
     {
         // Find the Target Group in the scene
         targetGroup = GameObject.FindObjectOfType<CinemachineTargetGroup>();
-
+        _destroyOnImpact = gameObject.GetComponent<Destroy_On_Impact>();
+        
         // Add this player to the Target Group
-        targetGroup.AddMember(this.transform, 1f, 10f);
+        if(!_destroyOnImpact.BShouldDestroy)
+        {
+            targetGroup.AddMember(this.transform, 1f, 10f);
+        }       
         
     }
 
