@@ -45,6 +45,11 @@ public class Player_Spawn_Manager : MonoBehaviour
     }    
     private IEnumerator DisablePlayerInputForTime(float time)
     {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        int nextSceneIndex;
+
         foreach (PlayerInput player in _playerInputs)
         {
             PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
@@ -52,7 +57,16 @@ public class Player_Spawn_Manager : MonoBehaviour
         }
         yield return new WaitForSeconds(time);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Random.Range(1, 6));
+
+        while (true)
+        {
+            nextSceneIndex = Random.Range(0, sceneCount);
+            if (nextSceneIndex != currentSceneIndex && nextSceneIndex != 1 && nextSceneIndex != 0)
+            {
+                break;
+            }
+        }
+        SceneManager.LoadScene(nextSceneIndex);        
     }
     private IEnumerator WaitForPlayer()
     {
