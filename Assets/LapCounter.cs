@@ -1,67 +1,372 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LapCounter : MonoBehaviour
-{
-    [SerializeField] int lapCompleted = 0;
-    [SerializeField] int checkpointsPassed = 0;
-    [SerializeField] int totalCheckpoints = 0;
-    [SerializeField] int lapsToWin = 0;
-    public Text winText;
-    [SerializeField] int numberFinishedPlayers = 0;
-    private List<GameObject> finishedPlayers;
+{   
+    [SerializeField] private int _lapsToWin = 0;
 
+    private PlayerInput[] _playerInput;
+    // Player 1
+    private int _lapCompletedPlayer1 = 0;
+    public bool bPlayer1WonRace = false;
+    public static int player1WonARace;
+    public static bool bPlayer1HasWonGrandPrix = false;
+    // Player 2
+    private int _lapCompletedPlayer2 = 0;
+    public bool bPlayer2WonRace = false;
+    public static int player2WonARace;
+    public static bool bPlayer2HasWonGrandPrix = false;
+    // Player 3 
+    private int _lapCompletedPlayer3 = 0;
+    public bool bPlayer3WonRace = false;
+    public static int player3WonARace;
+    public static bool bPlayer3HasWonGrandPrix = false;
+    // Player 4
+    private int _lapCompletedPlayer4 = 0;
+    public bool bPlayer4WonRace = false;
+    public static int player4WonARace;
+    public static bool bPlayer4HasWonGrandPrix = false;
+
+    public static List<GameObject> finishedPlayers;
+
+    private bool _isRaceFinished = false;
+
+    public static int sceneCounter;
+   
     void Start()
     {
+        sceneCounter = PlayerPrefs.GetInt("SceneCounter");
+        player1WonARace = PlayerPrefs.GetInt("Player1WonARace");
+        player2WonARace = PlayerPrefs.GetInt("Player2WonARace");
+        player3WonARace = PlayerPrefs.GetInt("Player3WonARace");
+        player4WonARace = PlayerPrefs.GetInt("Player4WonARace");
+
+        bPlayer1WonRace = false;
+        bPlayer2WonRace = false;
+        bPlayer3WonRace = false;
+        bPlayer4WonRace = false;
+
+
         finishedPlayers = new List<GameObject>();
+       
+        _playerInput = GameObject.FindObjectsOfType<PlayerInput>();
+            
     }
-
-
-
-
+    private void Update()
+    {               
+        AnnounceWinner();  
+        
+        StopFinishedPlayer();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("FinishLine"))
+        foreach(PlayerInput player in _playerInput)
         {
-            if(checkpointsPassed == totalCheckpoints) 
-            {
-                lapCompleted++;
-                checkpointsPassed = 0;
-             
-
-
-                Debug.Log("Lap Completed");
-
-                if(lapCompleted == lapsToWin)
+            if(collision.gameObject == player.gameObject)
+            {  
+                if(CheckPoint_Counter.checkpointsPassedPlayer1 > 0)
                 {
-                    numberFinishedPlayers++;
-                    finishedPlayers.Add(gameObject);
-
-                    //winText.gameObject.SetActive(true);
-                    Debug.Log("You win!");
-                    Debug.Log("Player " + numberFinishedPlayers + " finished in position " + finishedPlayers.Count);
-                    
-                    if (numberFinishedPlayers == 4)
+                    if (player.playerIndex == 0)
                     {
-                        Debug.Log("Race finished!");
+                        if(_lapCompletedPlayer1 == _lapsToWin)
+                        {
+                            finishedPlayers.Add(player.gameObject);
+                            Debug.Log("Player 1 finished the race");
+                        }
+                        _lapCompletedPlayer1 += 1;
+                        Debug.Log("Player 1 completed a lap");
+                        CheckPoint_Counter.checkpointsPassedPlayer1 = 0;
                     }
                 }
-
-            }
-            else 
+                if(CheckPoint_Counter.checkpointsPassedPlayer2 > 0)
+                {
+                    if (player.playerIndex == 1)
+                    {
+                        if (_lapCompletedPlayer2 == _lapsToWin)
+                        {
+                            finishedPlayers.Add(player.gameObject);
+                            Debug.Log("Player 2 finished the race");
+                        }
+                        _lapCompletedPlayer2 += 1;
+                        Debug.Log("Player 2 completed a lap");
+                        CheckPoint_Counter.checkpointsPassedPlayer2 = 0;
+                    }
+                }
+                if(CheckPoint_Counter.checkpointsPassedPlayer3 > 0)
+                {
+                    if (player.playerIndex == 2)
+                    {
+                        if (_lapCompletedPlayer3 == _lapsToWin)
+                        {
+                            finishedPlayers.Add(player.gameObject);
+                            Debug.Log("Player 3 finished the race");
+                        }
+                        _lapCompletedPlayer3 += 1;
+                        Debug.Log("Player 3 completed a lap");
+                        CheckPoint_Counter.checkpointsPassedPlayer3 = 0;
+                    }
+                }
+                if(CheckPoint_Counter.checkpointsPassedPlayer4 > 0)
+                {
+                    if (player.playerIndex == 3)
+                    {
+                        if (_lapCompletedPlayer4 == _lapsToWin)
+                        {
+                            finishedPlayers.Add(player.gameObject);
+                            Debug.Log("Player 4 finished the race");
+                        }
+                        _lapCompletedPlayer4 += 1;
+                        Debug.Log("Player 4 completed a lap");
+                        CheckPoint_Counter.checkpointsPassedPlayer4 = 0;
+                    }
+                }                
+            }           
+        }                
+    }    
+    private void AnnounceWinner()
+    {
+        foreach(PlayerInput player in _playerInput)
+        {            
+            if(player.playerIndex == 0)
             {
-                Debug.Log("Must pass checkpoints to complete lap!");
+                if(finishedPlayers.Count >= 1)
+                {
+                    if (player.gameObject == finishedPlayers[0])
+                    {
+                        if (!bPlayer1WonRace)
+                        {
+                            Debug.Log("Player 1 is the winner!!");
+                            bPlayer1WonRace = true;
+                            player1WonARace += 1;
+
+                            PlayerPrefs.SetInt("Player1WonARace", player1WonARace);
+                            PlayerPrefs.Save();
+                        }
+                    }
+                }
+                if(finishedPlayers.Count >= 2)
+                {
+                    if (player.gameObject == finishedPlayers[1])
+                    {
+                        Debug.Log("Player 1 finished in second place");
+                        
+                    }
+                }
+                if(finishedPlayers.Count >= 3)
+                {
+                    if (player.gameObject == finishedPlayers[2])
+                    {
+                        Debug.Log("Player 1 finished in third place");
+                    }
+                }
+                if(finishedPlayers.Count >= 4)
+                {
+                    if (player.gameObject == finishedPlayers[3])
+                    {
+                        Debug.Log("Player 1 finished in fourth place");
+                    }
+                }                            
+            }
+            if (player.playerIndex == 1)
+            {
+                if (finishedPlayers.Count >= 1)
+                {
+                    if (player.gameObject == finishedPlayers[0])
+                    {
+                        if(!bPlayer2WonRace)
+                        {
+                            Debug.Log("Player 2 is the winner!!");
+                            bPlayer2WonRace = true;
+                            player2WonARace += 1;
+
+                            PlayerPrefs.SetInt("Player2WonARace", player2WonARace);
+                            PlayerPrefs.Save();
+                        }
+                    }
+                }
+                if (finishedPlayers.Count >= 2)
+                {
+                    if (player.gameObject == finishedPlayers[1])
+                    {
+                        Debug.Log("Player 2 finished in second place");
+                    }
+                }
+                if (finishedPlayers.Count >= 3)
+                {
+                    if (player.gameObject == finishedPlayers[2])
+                    {
+                        Debug.Log("Player 2 finished in third place");
+                    }
+                }
+                if (finishedPlayers.Count >= 4)
+                {
+                    if (player.gameObject == finishedPlayers[3])
+                    {
+                        Debug.Log("Player 2 finished in fourth place");
+                    }
+                }
+            }
+            if (player.playerIndex == 2)
+            {
+                if (finishedPlayers.Count >= 1)
+                {
+                    if (player.gameObject == finishedPlayers[0])
+                    {
+                        if (!bPlayer3WonRace)
+                        {
+                            Debug.Log("Player 3 is the winner!!");
+                            bPlayer3WonRace = true;
+                            player3WonARace += 1;
+
+                            PlayerPrefs.SetInt("Player3WonARace", player3WonARace);
+                            PlayerPrefs.Save();
+                        }
+                    }
+                }
+                if (finishedPlayers.Count >= 2)
+                {
+                    if (player.gameObject == finishedPlayers[1])
+                    {
+                        Debug.Log("Player 3 finished in second place");
+                    }
+                }
+                if (finishedPlayers.Count >= 3)
+                {
+                    if (player.gameObject == finishedPlayers[2])
+                    {
+                        Debug.Log("Player 3 finished in third place");
+                    }
+                }
+                if (finishedPlayers.Count >= 4)
+                {
+                    if (player.gameObject == finishedPlayers[3])
+                    {
+                        Debug.Log("Player 3 finished in fourth place");
+                    }
+                }
+            }
+            if (player.playerIndex == 3)
+            {
+                if (finishedPlayers.Count >= 1)
+                {
+                    if (player.gameObject == finishedPlayers[0])
+                    {
+                        if (!bPlayer4WonRace)
+                        {
+                            Debug.Log("Player 4 is the winner!!");
+                            bPlayer4WonRace = true;
+                            player4WonARace += 1;
+
+                            PlayerPrefs.SetInt("Player4WonARace", player4WonARace);
+                            PlayerPrefs.Save();
+                        }
+                    }
+                }
+                if (finishedPlayers.Count >= 2)
+                {
+                    if (player.gameObject == finishedPlayers[1])
+                    {
+                        Debug.Log("Player 4 finished in second place");
+                    }
+                }
+                if (finishedPlayers.Count >= 3)
+                {
+                    if (player.gameObject == finishedPlayers[2])
+                    {
+                        Debug.Log("Player 4 finished in third place");
+                    }
+                }
+                if (finishedPlayers.Count >= 4)
+                {
+                    if (player.gameObject == finishedPlayers[3])
+                    {
+                        Debug.Log("Player 4 finished in fourth place");
+                    }
+                }
             }
         }
-        else if (collision.CompareTag("CheckPoint") && checkpointsPassed == 0) 
-        { 
-            checkpointsPassed++;
-            Debug.Log("Checkpoint passed");
-            
+    }   
+    private void StopFinishedPlayer()
+    {
+        foreach(GameObject player in finishedPlayers)
+        {
+            PlayerMovement playerRunValue = player.GetComponent<PlayerMovement>();
+
+            playerRunValue.PlayerRunSpeed = 0;
         }
-        
+        if(finishedPlayers.Count == _playerInput.Length - 1 && !_isRaceFinished)
+        {  
+            foreach(PlayerInput player in _playerInput)
+            {
+                PlayerMovement playerRunValue = player.GetComponent<PlayerMovement>();
+
+                playerRunValue.PlayerRunSpeed = 0;
+            }
+            _isRaceFinished = true;
+            StartCoroutine("SwitchLevel", 2f);            
+        }
     }
+    private IEnumerator SwitchLevel(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;      
+
+        int nextSceneIndex;
+        if(player1WonARace >= 3 || player2WonARace >= 3 || player3WonARace >= 3 || player4WonARace >= 3)
+        {
+            if(player1WonARace >= 3)
+            {
+                bPlayer1HasWonGrandPrix = true;
+                int intValue = bPlayer1HasWonGrandPrix ? 1 : 0;
+                PlayerPrefs.SetInt("Player1WonGrandPrix", intValue);
+            }
+            else if(player2WonARace >= 3)
+            {
+                bPlayer2HasWonGrandPrix = true;
+                int intValue = bPlayer2HasWonGrandPrix ? 1 : 0;
+                PlayerPrefs.SetInt("Player2WonGrandPrix", intValue);
+            }
+            else if(player3WonARace >= 3)
+            {
+                bPlayer3HasWonGrandPrix = true;
+                int intValue = bPlayer3HasWonGrandPrix ? 1 : 0;
+                PlayerPrefs.SetInt("Player3WonGrandPrix", intValue);
+            }
+            else if(player4WonARace >= 3)
+            {
+                bPlayer4HasWonGrandPrix = true;
+                int intValue = bPlayer4HasWonGrandPrix ? 1 : 0;
+                PlayerPrefs.SetInt("Player4WonGrandPrix", intValue);
+            }
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(1);
+        }
+        else 
+        {
+                       
+            while (true)
+            {
+                nextSceneIndex = Random.Range(0, sceneCount);
+                if (nextSceneIndex != currentSceneIndex && nextSceneIndex != 1 && nextSceneIndex != 0)
+                {
+                    break;
+                }
+            }
+            sceneCounter += 1;
+
+            // Save the updated sceneCounter value to PlayerPrefs (the value will persist throughout all the scenes)
+            PlayerPrefs.SetInt("SceneCounter", sceneCounter);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(nextSceneIndex);
+
+        }       
+    }    
 }
 

@@ -114,7 +114,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.6392157, b: 0.54509807, a: 1}
+  m_Color: {r: 1, g: 0.993865, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -148,7 +148,6 @@ MonoBehaviour:
   _groundCheck: {fileID: 0}
   _ceilingCheck: {fileID: 0}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 0
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
@@ -180,12 +179,11 @@ MonoBehaviour:
   _groundCheck: {fileID: 0}
   _ceilingCheck: {fileID: 0}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 0
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
-  _wallSlidingSpeed: 3
   input: {fileID: 0}
+  _wallSlidingSpeed: 3
 --- !u!96 &3994044877602057795
 TrailRenderer:
   serializedVersion: 2
@@ -381,7 +379,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.0627451, g: 0.6392157, b: 0.54509807, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -415,12 +413,11 @@ MonoBehaviour:
   _groundCheck: {fileID: 227423477263484694}
   _ceilingCheck: {fileID: 227423478552159870}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 200
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
-  _wallSlidingSpeed: 3
   input: {fileID: 227423477254909303}
+  _wallSlidingSpeed: 3
 --- !u!114 &227423477242574394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,7 +442,6 @@ MonoBehaviour:
   _groundCheck: {fileID: 227423477263484694}
   _ceilingCheck: {fileID: 227423478552159870}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 0
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
@@ -598,7 +594,6 @@ GameObject:
   - component: {fileID: 227423477254909301}
   - component: {fileID: 227423477254909302}
   - component: {fileID: 227423477254909303}
-  - component: {fileID: 3343588930653493571}
   - component: {fileID: 227423477254909300}
   - component: {fileID: -4324492497357594451}
   - component: {fileID: 750806729628574804}
@@ -673,7 +668,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.98957634, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -728,7 +723,6 @@ MonoBehaviour:
   _groundCheck: {fileID: 227423477263484694}
   _ceilingCheck: {fileID: 227423478552159870}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 200
   _knockbackForce: 5
   _knockbackTotalTime: 0.28
   inputMovement: {x: 0, y: 0}
@@ -749,10 +743,6 @@ MonoBehaviour:
   - {fileID: 227423477242574395}
   - {fileID: 227423477640983678}
   - {fileID: 227423477156398641}
-  shiftSquare: 0
-  shiftCircle: 0
-  shiftTriangle: 0
-  shiftStar: 0
 --- !u!114 &227423477254909303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,24 +937,6 @@ MonoBehaviour:
   m_DefaultActionMap: Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3343588930653493571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227423477254909304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe61ccae9de2394999c89a326d61c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lapCompleted: 0
-  checkpointsPassed: 0
-  totalCheckpoints: 1
-  lapsToWin: 2
-  winText: {fileID: 0}
-  numberFinishedPlayers: 0
 --- !u!58 &227423477254909300
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1201,7 +1173,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.0627451, g: 0.6392157, b: 0.54509807, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1235,7 +1207,6 @@ MonoBehaviour:
   _groundCheck: {fileID: 227423477263484694}
   _ceilingCheck: {fileID: 227423478552159870}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 0
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}
@@ -1451,7 +1422,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.0627451, g: 0.6392157, b: 0.54509807, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1485,7 +1456,6 @@ MonoBehaviour:
   _groundCheck: {fileID: 227423477263484694}
   _ceilingCheck: {fileID: 227423478552159870}
   _rigidBody2D: {fileID: 227423477254909298}
-  _runSpeed: 0
   _knockbackForce: 0
   _knockbackTotalTime: 0
   inputMovement: {x: 0, y: 0}

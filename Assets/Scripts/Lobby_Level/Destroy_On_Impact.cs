@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Destroy_On_Impact : MonoBehaviour
 {
+    [SerializeField] private LayerMask _collisionLayer;
+    [SerializeField] private bool _bShouldDestroy;
+
     private List<Shift_Shape> _playerObjects = new List<Shift_Shape>();
     private List<GameObject> _playerList = new List<GameObject>();
     private Shift_Shape[] _accessShapeEnums;   
@@ -13,55 +16,24 @@ public class Destroy_On_Impact : MonoBehaviour
     private PlayerMovement _thisPlayer;
     private GameObject _otherPlayer;
 
-    [SerializeField] private LayerMask _collisionLayer;
-    [SerializeField] private bool _bShouldDestroy;
-    public bool BShouldDestroy { get { return _bShouldDestroy; } }
-
+    private const float _startingDazedTimer = 3; // Used for players to ignore collision when the two collide
+    private const float _startingDestroyObjectTimer = 1f; // Used for falling dummy (timer)
+    private float _currentDestroyObjectTimer = 0f; // Used for falling dummy (timer)    
+    private float _currentDazedTimer = 0f; // Used for players to ignore collision when the two collide
+   
+    
     private bool _bBeingDestroyed = false;
     private bool _bHasAlreadyCollided = false;
     private bool _bIsDazed = false;
 
-    private float _currentDestroyObjectTimer = 0f; // Used for falling dummy (timer)
-    private const float _startingDestroyObjectTimer = 1f; // Used for falling dummy (timer)
-    private float _currentDazedTimer = 0f; // Used for players to ignore collision when the two collide
-    private const float _startingDazedTimer = 3; // Used for players to ignore collision when the two collide
+    public bool BShouldDestroy { get { return _bShouldDestroy; } }
 
     private void Start()
     {
         _thisPlayer = gameObject.GetComponent<PlayerMovement>();        
         StartCoroutine(FindPlayers());
     }
-    private IEnumerator FindPlayers()
-    {
-        while (true)
-        {
-            _playerObjects.Clear();
-
-            // Find all game objects with the tag "Player"
-            GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
-            _playerList = objectsWithTag.ToList();
-            // Filter the game objects based on whether they have the "Shift_Shape" script attached
-            foreach (GameObject obj in objectsWithTag)
-            {
-                 if (obj == gameObject) continue; // skip current game object
-                PlayerMovement playerMovementValues= obj.GetComponent<PlayerMovement>();
-                Shift_Shape shiftShape = obj.GetComponent<Shift_Shape>();
-                if (shiftShape != null)
-                {
-                    _playerObjects.Add(shiftShape);
-                }
-            }
-
-            // Assign _accessShapeEnums to found player
-            if (_playerObjects.Count > 0)
-            {
-                _accessShapeEnums = new Shift_Shape[_playerObjects.Count];
-                _playerObjects.CopyTo(_accessShapeEnums);
-            }
-
-            yield return new WaitForSeconds(1f); // update the list every 1 second
-        }
-    }
+    
     private void Update() 
     {
         
@@ -143,12 +115,11 @@ public class Destroy_On_Impact : MonoBehaviour
                             if (collision.transform.position.x <= gameObject.transform.position.x)
                             {
                                 _thisPlayer.KnockbackFromRight = true;
-                                Debug.Log("Knock from right");
+                               
                             }
                             if (collision.transform.position.x > gameObject.transform.position.x)
                             {
-                                _thisPlayer.KnockbackFromRight = false;
-                                Debug.Log("Knock from left");
+                                _thisPlayer.KnockbackFromRight = false;                               
                             }
                             // Ignore collision between _thisPlayer and _otherPlayer
                             Physics2D.IgnoreCollision(_thisPlayer.GetComponent<CircleCollider2D>(), _otherPlayer.GetComponent<CircleCollider2D>(), true);
@@ -167,5 +138,36 @@ public class Destroy_On_Impact : MonoBehaviour
     {
         yield return new WaitForSeconds(2f); // Change this value to the desired amount of time
         Physics2D.IgnoreCollision(_thisPlayer.GetComponent<Collider2D>(), _otherPlayer.GetComponent<Collider2D>(), false);
+    }
+    private IEnumerator FindPlayers()
+    {
+        while (true)
+        {
+            _playerObjects.Clear();
+
+            // Find all game objects with the tag "Player"
+            GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
+            _playerList = objectsWithTag.ToList();
+            // Filter the game objects based on whether they have the "Shift_Shape" script attached
+            foreach (GameObject obj in objectsWithTag)
+            {
+                if (obj == gameObject) continue; // skip current game object
+                PlayerMovement playerMovementValues = obj.GetComponent<PlayerMovement>();
+                Shift_Shape shiftShape = obj.GetComponent<Shift_Shape>();
+                if (shiftShape != null)
+                {
+                    _playerObjects.Add(shiftShape);
+                }
+            }
+
+            // Assign _accessShapeEnums to found player
+            if (_playerObjects.Count > 0)
+            {
+                _accessShapeEnums = new Shift_Shape[_playerObjects.Count];
+                _playerObjects.CopyTo(_accessShapeEnums);
+            }
+
+            yield return new WaitForSeconds(1f); // update the list every 1 second
+        }
     }
 }

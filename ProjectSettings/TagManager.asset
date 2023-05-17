@@ -9,6 +9,8 @@ TagManager:
   - Weak Point
   - FinishLine
   - CheckPoint
+  - Spike
+  - SlowingBlock
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,6 @@ TagManager:
   - Ground
   - ReadyButton
   - Player
-  - 
   - 
   - 
   - 

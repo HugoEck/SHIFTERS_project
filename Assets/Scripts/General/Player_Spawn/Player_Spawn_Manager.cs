@@ -9,59 +9,58 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class Player_Spawn_Manager : MonoBehaviour
 {
-    private int _randomizeMapSelection;
-
-    private List<int> _activePlayers;
-
     [SerializeField] private TextMeshProUGUI _startGameText;
 
-    private PlayerInput _playerOneAccess;
+    private PlayerInput[] _playerInputs;
 
-    private List<GameObject> _playerObjects = new List<GameObject>();
-
-    public int PlayerID { get; private set; }
+    private bool isCoroutineStarted = false;
     
+    private void Start()
+    {
+        StartCoroutine(WaitForPlayer());        
+        _startGameText.enabled = false;
+
+        foreach (PlayerInput player in _playerInputs)
+        {
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.PlayerRunSpeed = 200;
+        }
+    }
+    
+    public void Update()
+    {       
+        
+        if (_playerInputs.Length > 0)
+        {
+            _startGameText.enabled = true;
+            _startGameText.text = "PRESS 'X' OR 'START' TO START THE GAME: " + _playerInputs.Length + "/4 players";
+            if (PlayerMovement.bIsGameStarted && !isCoroutineStarted)
+            {
+                StartCoroutine(DisablePlayerInputForTime(2));
+                isCoroutineStarted = true;
+                    
+            }
+        }
+        
+    }    
+    private IEnumerator DisablePlayerInputForTime(float time)
+    {
+        foreach (PlayerInput player in _playerInputs)
+        {
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.PlayerRunSpeed = 0;
+        }
+        yield return new WaitForSeconds(time);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Random.Range(1, 6));
+    }
     private IEnumerator WaitForPlayer()
     {
         while (true)
         {
-            GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
-            _playerObjects = objectsWithTag.ToList();
-            yield return new WaitForSeconds(1f); // update the list every 1 second
+            _playerInputs = FindObjectsOfType<PlayerInput>();
+            yield return new WaitForSeconds(0.1f); // update the list every 1 second
         }
     }
 
-    private void Start()
-    {
-        StartCoroutine(WaitForPlayer());
-        _activePlayers = new List<int>();
-        _startGameText.enabled = false;
-    }
-    
-    public void Update()
-    {
-        
-        foreach (GameObject players in _playerObjects)
-        {
-            PlayerMovement playerMovement = players.GetComponent<PlayerMovement>();
-
-            if (_activePlayers.Count > 0)
-            {
-                _startGameText.enabled = true;
-                _startGameText.text = "PRESS 'X' OR 'START' TO START THE GAME: " + _activePlayers.Count + "/4 players";
-                if (playerMovement.bIsGameStarted)
-                {                    
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + Random.Range(1, 6));
-                }
-            }            
-        }        
-    }
-    void OnPlayerJoined(PlayerInput playerInput)
-    {
-        _playerOneAccess = (PlayerInput)playerInput;
-        Debug.Log("Player Input ID: " + playerInput.playerIndex);
-        _activePlayers.Add(playerInput.playerIndex);
-
-        PlayerID = playerInput.playerIndex;
-    }    
 }

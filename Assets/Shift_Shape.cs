@@ -6,28 +6,29 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEngine.Rendering.DebugUI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 using UnityEngine.InputSystem.XR;
 
 public class Shift_Shape : Shift_Shape_base
 {
-    // Start is called before the first frame update
-
-    public bool shiftSquare;
-    public bool shiftCircle;
-    public bool shiftTriangle;
-    public bool shiftStar;
-
-    private bool isCountdownActive = false;
-    private float countdownTimer = 0f;
-    private float cooldownTimer = 0f;
+    private float _countdownTimer = 0f;
+    private float _cooldownTimer = 0f;
     public const float countdownDuration = 5f;
     public const float cooldownDuration = 15f;
-    private bool isCooldownActive = false;
-    private bool isStarActive = false;
-    private bool canShiftToStar = true;
 
+    private bool _isCooldownActive = false;
+    private bool _isStarActive = false;
+    private bool _canShiftToStar = true;
+    private bool _isCountdownActive = false;
+    private bool _changedScene = false;
+
+    public bool shiftSquare { get; private set; }
+    public bool shiftCircle { get; private set; }
+    public bool shiftTriangle { get; private set; }
+    public bool shiftStar { get; private set; }
+    
     protected override void Start()
     {
         currentShapeState = new Shape_Enum();
@@ -62,27 +63,60 @@ public class Shift_Shape : Shift_Shape_base
     // Update is called once per frame
     protected override void Update()
     {
-        if (isCountdownActive)
+        if(_changedScene)
         {
-            countdownTimer += Time.deltaTime;
-            if (countdownTimer >= countdownDuration)
+            _isCountdownActive = false;
+            _isCooldownActive = false;
+            _isStarActive = false;
+            _canShiftToStar = true;
+
+            _changedScene = false;
+
+            shapes[2].SetActive(false);
+            shapes[1].SetActive(false);
+            shapes[0].SetActive(false);
+            shapes[3].SetActive(false);
+
+            randomShapeNumber = random.Next(0, 3);
+
+            shapes[randomShapeNumber].SetActive(true);
+
+            if (shapes[0].activeSelf)
             {
-                countdownTimer = 0f;
-                isCountdownActive = false;
+                currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
+            }
+            else if (shapes[1].activeSelf)
+            {
+                currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square;
+            }
+            else if (shapes[2].activeSelf)
+            {
+                currentShapeState.currentShapeState = Shape_Enum.ShapeState.Triangle;
+            }
+
+        }
+
+        if (_isCountdownActive)
+        {
+            _countdownTimer += Time.deltaTime;
+            if (_countdownTimer >= countdownDuration)
+            {
+                _countdownTimer = 0f;
+                _isCountdownActive = false;
                 ShiftToCircle();
-                isCooldownActive = true;
-                cooldownTimer = cooldownDuration;
+                _isCooldownActive = true;
+                _cooldownTimer = cooldownDuration;
                 StartCoroutine(DisableCooldownAfterDelay());
             }
         }
-        if (isCooldownActive)
+        if (_isCooldownActive)
         {
             // Check if cooldown has ended
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0f)
+            _cooldownTimer -= Time.deltaTime;
+            if (_cooldownTimer <= 0f)
             {
-                cooldownTimer = 0f;
-                isCooldownActive = false;
+                _cooldownTimer = 0f;
+                _isCooldownActive = false;
             }
         }
 
@@ -127,7 +161,7 @@ public class Shift_Shape : Shift_Shape_base
     }
     private void ActivateShape(int active, int notActive1, int notActive2, int notActive3)
     {
-        if (isCountdownActive || (isCooldownActive && isStarActive) || (isCooldownActive && active == 3 && !canShiftToStar))
+        if (_isCountdownActive || (_isCooldownActive && _isStarActive) || (_isCooldownActive && active == 3 && !_canShiftToStar))
             return;
 
         shapes[active].SetActive(true);
@@ -137,9 +171,9 @@ public class Shift_Shape : Shift_Shape_base
 
         if (active == 3)
         {
-            isStarActive = true;
-            isCountdownActive = true;
-            canShiftToStar = false;
+            _isStarActive = true;
+            _isCountdownActive = true;
+            _canShiftToStar = false;
         }
     }
 
@@ -171,10 +205,10 @@ public class Shift_Shape : Shift_Shape_base
     {
         ActivateShape(0, 1, 2, 3);
         currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
-        isStarActive = false;
-        isCountdownActive = false;
-        countdownTimer = 0f;
-        cooldownTimer = cooldownDuration;
+        _isStarActive = false;
+        _isCountdownActive = false;
+        _countdownTimer = 0f;
+        _cooldownTimer = cooldownDuration;
 
         // Reset other shift flags
         shiftSquare = false;
@@ -183,12 +217,22 @@ public class Shift_Shape : Shift_Shape_base
         
 
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Set the boolean variable to true when a scene is loaded
+        _changedScene = true;
+    }
     private System.Collections.IEnumerator DisableCooldownAfterDelay()
     {
         yield return new WaitForSeconds(cooldownDuration);
 
-        isCooldownActive = false;
+        _isCooldownActive = false;
 
         yield break;
     }
+    
 }

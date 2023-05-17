@@ -6,22 +6,20 @@ using UnityEngine.InputSystem;
 
 public class Wall_Jumping : PlayerMovement
 {
-    
-    [SerializeField]private float _wallSlidingSpeed = 1f;
     [SerializeField] PlayerInput input;
-    
-    private bool _isWallJumping;
-    private bool _isWallSliding;
-    public bool HasJumped { get; set; }
+    [SerializeField]private float _wallSlidingSpeed = 1f;
     
     private float _wallJumpingDirection;
     private float _wallJumpingTime = 0.2f;
     private float _wallJumpingCounter;
     private float _wallJumpingDuration = 0.4f;
-    
-    
+
     private Vector2 _wallJumpingPower = new Vector2(8f, 16f);
 
+    private bool _isWallJumping;
+    private bool _isWallSliding;
+    public bool HasJumped { get; set; }
+    
     protected override void Awake()
     {
         
