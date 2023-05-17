@@ -6,27 +6,30 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 5a55555f040d5c0a0c0b0a2111770747404e4f792d2d7033287a4b64b1b6646c
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 5a06005750025c0e0f5a0a7647220b444f4f4b732d7070347e2a486ae7b0626b
-      flags: 0
-    RecentlyUsedSceneGuid-2:
       value: 51030c5604040a58090d557a45705e44421640297b2e20677c7d1c65b6b03568
       flags: 0
+    RecentlyUsedSceneGuid-1:
+      value: 5354560707030c030c5e09204421094415164e72792a2732792f4431e7e6363b
+      flags: 0
+    RecentlyUsedSceneGuid-2:
+      value: 535701535c0d5e5e0c5f557042260a44124f1a2e2d702565782f4a6bb7e3656a
+      flags: 0
     RecentlyUsedSceneGuid-3:
-      value: 015306555c040f0b0959097713760944104f4f297b78243479784f62b3b16569
+      value: 5b570351555758085f58582611270a44424e4d7c7e7e72652c7c4b30b0e46c6c
       flags: 0
     RecentlyUsedSceneGuid-4:
-      value: 530806070701595a5d5c0e7b48770744174f4c2f2e7873622f7f1e37e1b1373e
+      value: 0503555254045d5a0b565a2648200844124f49282e2973612e794967e3e5663d
       flags: 0
     RecentlyUsedSceneGuid-5:
-      value: 5755575152530a0f0e0d5872157559444516497c297e25667a7c4f66bbb5633c
+      value: 5652500751515c0f0c5f542444740744144f4173752b74352f7c4d63b7e6316a
       flags: 0
     RecentlyUsedSceneGuid-6:
-      value: 5b520d0503545b0d0c0c0a2715770748154f4d2c7d7d7e627a7d4a35b4e1646a
+      value: 5355510200505e095b0d5e7746735c44134f4e732f7825347e7c4b60e6e56d61
       flags: 0
     RecentlyUsedSceneGuid-7:
+      value: 56030d5304020a0d585e5c7a427a0844104f4d2b2d7b23357d714963b3b56c6f
+      flags: 0
+    RecentlyUsedSceneGuid-8:
       value: 0605015f03510f0c555855244777084415151d297c7971612f2f1c36b1e5663e
       flags: 0
     vcSharedLogLevel:
@@ -37,7 +40,7 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 2
+  m_DesiredImportWorkerCount: 4
   m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1
