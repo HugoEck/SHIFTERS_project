@@ -30,12 +30,14 @@ public class PlayerMovement : CharacterController2D
     private float _currentPlayerDazedTime = 0f;
     private float _startingPlayerDazedTime = 2f;
 
-    public Vector2 inputMovement = Vector2.zero;
+    private Vector2 inputMovement = Vector2.zero;
 
     private bool _changedScene = false;   
     private bool _jumped;
     private bool _moveLeft;
     private bool _moveRight;
+    private bool _GamepadLeft;
+    private bool _GamepadRight;
     private bool _spaceJump;
     private bool _knockbackFromRight;
 
@@ -81,7 +83,6 @@ public class PlayerMovement : CharacterController2D
     // Update is called once per frame
     protected virtual void Update()
     {
-        
         // If the current scene isn't the lobby scene and if scenemanager recently detected a change in scenes, then disable movement for x seconds
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Lobby_Scene") && _changedScene)
         {          
@@ -91,6 +92,7 @@ public class PlayerMovement : CharacterController2D
         }
 
         _horizontalMove = inputMovement.x * _runSpeed;          
+        //inputMovement = Gamepad.current != null ? Gamepad.current.leftStick.ReadValue() : Vector2.zero;
     }    
     protected override void FixedUpdate()
     {
@@ -165,9 +167,39 @@ public class PlayerMovement : CharacterController2D
     }
 
     //Metoder till nya input systemets inputActions
-    public void OnMove(InputAction.CallbackContext context)
+    //public void OnMove(InputAction.CallbackContext context)
+    //{
+    //    inputMovement = context.ReadValue<Vector2>();
+    //}
+
+    public void OnLeftStickLeft(InputAction.CallbackContext context)
     {
-        inputMovement = context.ReadValue<Vector2>();
+        _GamepadLeft = context.ReadValueAsButton();
+        Debug.Log("Left");
+        inputMovement.x = -1;
+    }
+
+    public void OnLeftStickRight(InputAction.CallbackContext context)
+    {
+        _GamepadRight = context.ReadValueAsButton();
+        Debug.Log("Right");
+        inputMovement.x = 1;
+    }
+
+    public void OnLeftStickLeftRelease(InputAction.CallbackContext context)
+    {
+        if (_GamepadLeft == false)
+        {
+            inputMovement.x = 0;
+        }
+    }
+    
+    public void OnLeftStickRightRelease(InputAction.CallbackContext context)
+    {
+        if (_GamepadRight == false)
+        {
+            inputMovement.x = 0;
+        }
     }
 
     public void OnLeft(InputAction.CallbackContext context)
