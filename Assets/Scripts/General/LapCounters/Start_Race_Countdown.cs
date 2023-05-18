@@ -15,16 +15,17 @@ public class Start_Race_Countdown : MonoBehaviour
         {
             _bHasStartedRace = true;
             StartCoroutine(StartCountDown());
+            FindObjectOfType<AudioManager>().Play("COUNTDOWN");
         }
     }
     private IEnumerator StartCountDown()
     {
-        _countDownText.text = "4";
-
-        yield return new WaitForSeconds(1f);
+        //_countDownText.text = "4";
+        //
+        //yield return new WaitForSeconds(1f);
 
         _countDownText.text = "3";
-
+        
         yield return new WaitForSeconds(1f);
 
         _countDownText.text = "2";

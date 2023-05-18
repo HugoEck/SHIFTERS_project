@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &117663995345939786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117663995345939780}
+  - component: {fileID: 117663995345939787}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &117663995345939780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117663995345939786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.209102, y: 0.37780857, z: -0.5627085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &117663995345939787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117663995345939786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf33dbf4626b414b9041521a0afebe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - soundname: SHIFTERS_MENY
+    sound: {fileID: 8300000, guid: aeef39683afc5164c8f67c81ebf18d3b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - soundname: SHIFTERS_MUSIC
+    sound: {fileID: 8300000, guid: 135ee6eac0f224f469c98bfd8f38dc44, type: 3}
+    volume: 0.159
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - soundname: COUNTDOWN
+    sound: {fileID: 8300000, guid: 3012a93a3a42f284681f190bd0210c7c, type: 3}
+    volume: 0.168
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - soundname: HIT
+    sound: {fileID: 8300000, guid: 9ba7a581480ab5a4380a0a1fe7829a85, type: 3}
+    volume: 0.214
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
