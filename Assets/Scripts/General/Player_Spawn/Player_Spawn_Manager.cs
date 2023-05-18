@@ -66,7 +66,8 @@ public class Player_Spawn_Manager : MonoBehaviour
                 break;
             }
         }
-        SceneManager.LoadScene(nextSceneIndex);        
+        SceneManager.LoadScene(nextSceneIndex);
+        
     }
     private IEnumerator WaitForPlayer()
     {
