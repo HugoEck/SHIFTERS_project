@@ -33,7 +33,7 @@ public class Player_Spawn_Manager : MonoBehaviour
         if (_playerInputs.Length > 1)
         {
             _startGameText.enabled = true;
-            _startGameText.text = "PRESS 'X' OR 'START' TO START THE GAME: " + _playerInputs.Length + "/4 players";
+            _startGameText.text = "PRESS 'X' (KEYBOARD) OR 'START' (GAMEPAD) TO START THE GAME: " + _playerInputs.Length + "/4 players";
             if (PlayerMovement.bIsGameStarted && !isCoroutineStarted)
             {
                 StartCoroutine(DisablePlayerInputForTime(2));

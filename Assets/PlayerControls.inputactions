@@ -313,6 +313,17 @@
                 },
                 {
                     "name": "",
+                    "id": "86f7eac0-112a-4a4f-9b69-d6a578cf29d3",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2b355ba4-1841-4866-99d9-986067b368a5",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
