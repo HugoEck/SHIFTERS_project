@@ -13,33 +13,35 @@ public class LapCounter : MonoBehaviour
     private PlayerInput[] _playerInput;
     // Player 1
     private int _lapCompletedPlayer1 = 0;
-    public bool bPlayer1WonRace = false;
+    public static bool bPlayer1WonRace = false;
     public static int player1WonARace;
     public static bool bPlayer1HasWonGrandPrix = false;
     // Player 2
     private int _lapCompletedPlayer2 = 0;
-    public bool bPlayer2WonRace = false;
+    public static bool  bPlayer2WonRace = false;
     public static int player2WonARace;
     public static bool bPlayer2HasWonGrandPrix = false;
     // Player 3 
     private int _lapCompletedPlayer3 = 0;
-    public bool bPlayer3WonRace = false;
+    public static bool bPlayer3WonRace = false;
     public static int player3WonARace;
     public static bool bPlayer3HasWonGrandPrix = false;
     // Player 4
     private int _lapCompletedPlayer4 = 0;
-    public bool bPlayer4WonRace = false;
+    public static bool bPlayer4WonRace = false;
     public static int player4WonARace;
     public static bool bPlayer4HasWonGrandPrix = false;
 
     public static List<GameObject> finishedPlayers;
 
-    private bool _isRaceFinished = false;
+    public static bool bIsRaceFinished = false;
 
     public static int sceneCounter;
    
     void Start()
     {
+        bIsRaceFinished = false;
+
         sceneCounter = PlayerPrefs.GetInt("SceneCounter");
         player1WonARace = PlayerPrefs.GetInt("Player1WonARace");
         player2WonARace = PlayerPrefs.GetInt("Player2WonARace");
@@ -299,7 +301,7 @@ public class LapCounter : MonoBehaviour
 
             playerRunValue.PlayerRunSpeed = 0;
         }
-        if(finishedPlayers.Count == _playerInput.Length - 1 && !_isRaceFinished)
+        if(finishedPlayers.Count == _playerInput.Length - 1 && !bIsRaceFinished)
         {  
             foreach(PlayerInput player in _playerInput)
             {
@@ -307,8 +309,8 @@ public class LapCounter : MonoBehaviour
 
                 playerRunValue.PlayerRunSpeed = 0;
             }
-            _isRaceFinished = true;
-            StartCoroutine("SwitchLevel", 2f);            
+            bIsRaceFinished = true;
+            StartCoroutine("SwitchLevel", 5f);            
         }
     }
     private IEnumerator SwitchLevel(float time)

@@ -30,7 +30,7 @@ public class Player_Spawn_Manager : MonoBehaviour
     public void Update()
     {       
         
-        if (_playerInputs.Length > 0)
+        if (_playerInputs.Length > 1)
         {
             _startGameText.enabled = true;
             _startGameText.text = "PRESS 'X' OR 'START' TO START THE GAME: " + _playerInputs.Length + "/4 players";
@@ -66,7 +66,8 @@ public class Player_Spawn_Manager : MonoBehaviour
                 break;
             }
         }
-        SceneManager.LoadScene(nextSceneIndex);        
+        //SceneManager.LoadScene(nextSceneIndex);
+        SceneManager.LoadScene(2);
     }
     private IEnumerator WaitForPlayer()
     {
