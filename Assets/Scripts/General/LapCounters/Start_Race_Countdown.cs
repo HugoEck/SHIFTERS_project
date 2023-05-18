@@ -40,5 +40,6 @@ public class Start_Race_Countdown : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         _countDownText.text = "";
+        FindObjectOfType<AudioManager>().Play("SHIFTERS_MUSIC");
     }
 }

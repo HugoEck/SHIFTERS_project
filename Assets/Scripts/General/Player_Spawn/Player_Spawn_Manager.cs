@@ -17,6 +17,7 @@ public class Player_Spawn_Manager : MonoBehaviour
     
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Play("SHIFTERS_MENY");
         StartCoroutine(WaitForPlayer());        
         _startGameText.enabled = false;
 

@@ -21,12 +21,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        Play("SHIFTERS_MUSIC");
-    }
-
-    // Update is called once per frame
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.soundname == name);

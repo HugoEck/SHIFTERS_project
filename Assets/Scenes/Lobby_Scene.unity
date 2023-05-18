@@ -18750,10 +18750,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - soundname: SHIFTERS_MUSIC
-    sound: {fileID: 8300000, guid: 135ee6eac0f224f469c98bfd8f38dc44, type: 3}
+  - soundname: SHIFTERS_MENY
+    sound: {fileID: 8300000, guid: aeef39683afc5164c8f67c81ebf18d3b, type: 3}
     volume: 1
     pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - soundname: SHIFTERS_MUSIC
+    sound: {fileID: 8300000, guid: 135ee6eac0f224f469c98bfd8f38dc44, type: 3}
+    volume: 0.205
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &2117171208
 Transform:
