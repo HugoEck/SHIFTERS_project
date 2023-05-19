@@ -12,41 +12,23 @@ public class LapCounter : MonoBehaviour
 
     private PlayerInput[] _playerInput;
     // Player 1
-    private int _lapCompletedPlayer1 = 0;
+    public static int lapCompletedPlayer1 = 0;
     public static bool bPlayer1WonRace = false;
     public static int player1WonARace;
     public static bool bPlayer1HasWonGrandPrix = false;
     // Player 2
-    private int _lapCompletedPlayer2 = 0;
+    public static int lapCompletedPlayer2 = 0;
     public static bool  bPlayer2WonRace = false;
     public static int player2WonARace;
     public static bool bPlayer2HasWonGrandPrix = false;
     // Player 3 
-    private int _lapCompletedPlayer3 = 0;
+    public static int lapCompletedPlayer3 = 0;
     public static bool bPlayer3WonRace = false;
     public static int player3WonARace;
     public static bool bPlayer3HasWonGrandPrix = false;
     // Player 4
-    private int _lapCompletedPlayer4 = 0;
-    public static bool bPlayer4WonRace = false;
-    public static int lapCompletedPlayer1 = 0;
-    public bool bPlayer1WonRace = false;
-    public static int player1WonARace;
-    public static bool bPlayer1HasWonGrandPrix = false;
-    // Player 2
-    public static int lapCompletedPlayer2 = 0;
-    public bool bPlayer2WonRace = false;
-    public static int player2WonARace;
-    public static bool bPlayer2HasWonGrandPrix = false;
-    // Player 3 
-    public static int lapCompletedPlayer3 = 0;
-    public bool bPlayer3WonRace = false;
-    public static int player3WonARace;
-    public static bool bPlayer3HasWonGrandPrix = false;
-    // Player 4
     public static int lapCompletedPlayer4 = 0;
-    public bool bPlayer4WonRace = false;
->>>>>>> Pontus_cooldown_HUD
+    public static bool bPlayer4WonRace = false;  
     public static int player4WonARace;
     public static bool bPlayer4HasWonGrandPrix = false;
 
