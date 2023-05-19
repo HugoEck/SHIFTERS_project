@@ -37534,7 +37534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe61ccae9de2394999c89a326d61c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lapsToWin: 3
+  lapsToWin: 2
   bPlayer1WonRace: 0
   bPlayer2WonRace: 0
   bPlayer3WonRace: 0
