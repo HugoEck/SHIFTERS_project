@@ -1,28 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
-using System.Collections.Generic;
-using System.Collections;
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Reset_Values : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI Player1_Place_Text;
-    [SerializeField] TextMeshProUGUI Player2_Place_Text;
-    [SerializeField] TextMeshProUGUI Player3_Place_Text;
-    [SerializeField] TextMeshProUGUI Player4_Place_Text;
-    [SerializeField] GameObject ScoreBoard;
-
     private void Start()
-    {
-        
-        
-        
-        ScoreBoard.SetActive(false);
-        ScoreBoardFinish();
-
+    {      
         // Call the method to check the current scene index
-        CheckCurrentSceneIndex(); 
-        
+        CheckCurrentSceneIndex();        
 
     }
 
@@ -179,54 +166,6 @@ public class Reset_Values : MonoBehaviour
 
         PlayerPrefs.Save();
     }
-
-    private void ScoreBoardFinish()
-    {
-        if(LapCounter.player1WonARace > 0 || LapCounter.player2WonARace > 0 || LapCounter.player3WonARace > 0 || LapCounter.player4WonARace > 0) 
-        {
-            StartCoroutine(ShowScoreboard());
-        }
-        
-
-
-    }
-    private IEnumerator ShowScoreboard()
-    {
-        ScoreBoard.SetActive(true);
-        if (LapCounter.player1WonARace == 3)
-        {
-            Player1_Place_Text.text = "Player 1 Winner  Wins: " + LapCounter.player1WonARace;
-            Player2_Place_Text.text = "Player 2 Wins: " + LapCounter.player2WonARace;
-            Player3_Place_Text.text = "Player 3 Wins: " + LapCounter.player3WonARace;
-            Player4_Place_Text.text = "Player 4 Wins: " + LapCounter.player4WonARace;
-        }
-        else if (LapCounter.player2WonARace == 3)
-        {
-            Player1_Place_Text.text = "Player 1 Wins: " + LapCounter.player1WonARace;
-            Player2_Place_Text.text = "Player 2 Winner  Wins: " + LapCounter.player2WonARace;
-            Player3_Place_Text.text = "Player 3 Wins: " + LapCounter.player3WonARace;
-            Player4_Place_Text.text = "Player 4 Wins: " + LapCounter.player4WonARace;
-        }
-        else if (LapCounter.player3WonARace == 3)
-        {
-            Player1_Place_Text.text = "Player 1 Wins: " + LapCounter.player1WonARace;
-            Player2_Place_Text.text = "Player 2 Wins: " + LapCounter.player2WonARace;
-            Player3_Place_Text.text = "Player 3 Winner  Wins: " + LapCounter.player3WonARace;
-            Player4_Place_Text.text = "Player 4 Wins: " + LapCounter.player4WonARace;
-        }
-        else if (LapCounter.player4WonARace == 3)
-        {
-            Player1_Place_Text.text = "Player 1 Wins: " + LapCounter.player1WonARace;
-            Player2_Place_Text.text = "Player 2 Wins: " + LapCounter.player2WonARace;
-            Player3_Place_Text.text = "Player 3 Wins: " + LapCounter.player3WonARace;
-            Player4_Place_Text.text = "Player 4 Winner  Wins: " + LapCounter.player4WonARace;
-        }
-        yield return new WaitForSeconds(10);
-
-        ScoreBoard.SetActive(false);
-
-    }
-
 }
 
 
