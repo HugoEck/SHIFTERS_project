@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class LapCounter : MonoBehaviour
 {   
-    [SerializeField] private int _lapsToWin = 0;
+    public int lapsToWin = 0;
 
     private PlayerInput[] _playerInput;
     // Player 1
@@ -29,6 +29,24 @@ public class LapCounter : MonoBehaviour
     // Player 4
     private int _lapCompletedPlayer4 = 0;
     public static bool bPlayer4WonRace = false;
+    public static int lapCompletedPlayer1 = 0;
+    public bool bPlayer1WonRace = false;
+    public static int player1WonARace;
+    public static bool bPlayer1HasWonGrandPrix = false;
+    // Player 2
+    public static int lapCompletedPlayer2 = 0;
+    public bool bPlayer2WonRace = false;
+    public static int player2WonARace;
+    public static bool bPlayer2HasWonGrandPrix = false;
+    // Player 3 
+    public static int lapCompletedPlayer3 = 0;
+    public bool bPlayer3WonRace = false;
+    public static int player3WonARace;
+    public static bool bPlayer3HasWonGrandPrix = false;
+    // Player 4
+    public static int lapCompletedPlayer4 = 0;
+    public bool bPlayer4WonRace = false;
+>>>>>>> Pontus_cooldown_HUD
     public static int player4WonARace;
     public static bool bPlayer4HasWonGrandPrix = false;
 
@@ -53,6 +71,10 @@ public class LapCounter : MonoBehaviour
         bPlayer3WonRace = false;
         bPlayer4WonRace = false;
 
+        lapCompletedPlayer1 = 0;
+        lapCompletedPlayer2 = 0;
+        lapCompletedPlayer3 = 0;
+        lapCompletedPlayer4 = 0;
 
         finishedPlayers = new List<GameObject>();
        
@@ -75,12 +97,12 @@ public class LapCounter : MonoBehaviour
                 {
                     if (player.playerIndex == 0)
                     {
-                        if(_lapCompletedPlayer1 == _lapsToWin)
+                        if(lapCompletedPlayer1 == lapsToWin)
                         {
                             finishedPlayers.Add(player.gameObject);
                             Debug.Log("Player 1 finished the race");
                         }
-                        _lapCompletedPlayer1 += 1;
+                        lapCompletedPlayer1 += 1;
                         Debug.Log("Player 1 completed a lap");
                         CheckPoint_Counter.checkpointsPassedPlayer1 = 0;
                     }
@@ -89,12 +111,12 @@ public class LapCounter : MonoBehaviour
                 {
                     if (player.playerIndex == 1)
                     {
-                        if (_lapCompletedPlayer2 == _lapsToWin)
+                        if (lapCompletedPlayer2 == lapsToWin)
                         {
                             finishedPlayers.Add(player.gameObject);
                             Debug.Log("Player 2 finished the race");
                         }
-                        _lapCompletedPlayer2 += 1;
+                        lapCompletedPlayer2 += 1;
                         Debug.Log("Player 2 completed a lap");
                         CheckPoint_Counter.checkpointsPassedPlayer2 = 0;
                     }
@@ -103,12 +125,12 @@ public class LapCounter : MonoBehaviour
                 {
                     if (player.playerIndex == 2)
                     {
-                        if (_lapCompletedPlayer3 == _lapsToWin)
+                        if (lapCompletedPlayer3 == lapsToWin)
                         {
                             finishedPlayers.Add(player.gameObject);
                             Debug.Log("Player 3 finished the race");
                         }
-                        _lapCompletedPlayer3 += 1;
+                        lapCompletedPlayer3 += 1;
                         Debug.Log("Player 3 completed a lap");
                         CheckPoint_Counter.checkpointsPassedPlayer3 = 0;
                     }
@@ -117,12 +139,12 @@ public class LapCounter : MonoBehaviour
                 {
                     if (player.playerIndex == 3)
                     {
-                        if (_lapCompletedPlayer4 == _lapsToWin)
+                        if (lapCompletedPlayer4 == lapsToWin)
                         {
                             finishedPlayers.Add(player.gameObject);
                             Debug.Log("Player 4 finished the race");
                         }
-                        _lapCompletedPlayer4 += 1;
+                        lapCompletedPlayer4 += 1;
                         Debug.Log("Player 4 completed a lap");
                         CheckPoint_Counter.checkpointsPassedPlayer4 = 0;
                     }

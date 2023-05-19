@@ -13,15 +13,15 @@ using UnityEngine.InputSystem.XR;
 
 public class Shift_Shape : Shift_Shape_base
 {
-    private float _countdownTimer = 0f;
-    private float _cooldownTimer = 0f;
+    public float _countdownTimer = 0f;
+    public float _cooldownTimer = 0f;
     public const float countdownDuration = 5f;
     public const float cooldownDuration = 15f;
 
-    private bool _isCooldownActive = false;
-    private bool _isStarActive = false;
+    public bool _isCooldownActive = false;
+    public bool _isStarActive = false;
     private bool _canShiftToStar = true;
-    private bool _isCountdownActive = false;
+    public bool _isCountdownActive = false;
     private bool _changedScene = false;
 
     public bool shiftSquare { get; private set; }
@@ -122,42 +122,52 @@ public class Shift_Shape : Shift_Shape_base
 
         if (shiftSquare)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square;
+            
             Square();
         }
         if (shiftTriangle)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Triangle;
+            
             Triangle();
         }
         if (shiftCircle)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
+            
             Circle();
         }
         if (shiftStar)
         {
-            currentShapeState.currentShapeState = Shape_Enum.ShapeState.Star;
+            
             Star();
         }
     }
 
     protected override void Square()
     {
+        if (_isStarActive)
+            return;
         ActivateShape(1, 0, 2, 3);
+        currentShapeState.currentShapeState = Shape_Enum.ShapeState.Square;
 
     }
     protected override void Circle()
     {
+        if (_isStarActive)
+            return;
         ActivateShape(0, 1, 2, 3);
+        currentShapeState.currentShapeState = Shape_Enum.ShapeState.Circle;
     }
     protected override void Star()
     {
         ActivateShape(3, 2, 1, 0);
+        currentShapeState.currentShapeState = Shape_Enum.ShapeState.Star;
     }
     protected override void Triangle()
     {
+        if (_isStarActive)
+            return;
         ActivateShape(2, 1, 0, 3);
+        currentShapeState.currentShapeState = Shape_Enum.ShapeState.Triangle;
     }
     private void ActivateShape(int active, int notActive1, int notActive2, int notActive3)
     {
@@ -176,7 +186,6 @@ public class Shift_Shape : Shift_Shape_base
             _canShiftToStar = false;
         }
     }
-
 
     //Methods for New input system inputACtions
 
