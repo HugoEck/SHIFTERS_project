@@ -81,6 +81,7 @@ public class Destroy_On_Impact : MonoBehaviour
                             }
 
                             _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
+                            FindObjectOfType<AudioManager>().Play("HIT");
 
                             if (collision.transform.position.x <= gameObject.transform.position.x)
                             {
@@ -111,6 +112,7 @@ public class Destroy_On_Impact : MonoBehaviour
                             }
 
                             _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
+                            FindObjectOfType<AudioManager>().Play("HIT");
 
                             if (collision.transform.position.x <= gameObject.transform.position.x)
                             {

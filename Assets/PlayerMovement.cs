@@ -247,7 +247,7 @@ public class PlayerMovement : CharacterController2D
     
     public void OnSpaceJump(InputAction.CallbackContext context)
     {
-        if(_accessThisShape.currentShapeState.currentShapeState != Shape_Enum.ShapeState.Circle)
+        if (_accessThisShape.currentShapeState.currentShapeState != Shape_Enum.ShapeState.Circle)
         {
             _spaceJump = context.action.triggered;
             _wallJumping.HasJumped = context.action.triggered;
