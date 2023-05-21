@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Slowing_Blocks : MonoBehaviour
 {
     [SerializeField] private bool _bAlwaysSearchForPlayers;
+
     private PlayerInput[] _playerInput;
     private Slowing_Block_Spawner _spawner;
 

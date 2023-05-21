@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Dummy_Spawner : MonoBehaviour
 {
+    [SerializeField] private GameObject _spawnShape;
+
     private System.Random random = new System.Random();
 
     private float _currentTime = 0f;    
     private float _startingTime;
-
-    [SerializeField] private GameObject _spawnShape;
     
     public void Start()
     {

@@ -5,28 +5,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Spike_Collision : MonoBehaviour
-{    
-    private PlayerInput[] _playerInput;
-
+{
     [SerializeField] private bool _bAlwaysSearchForPlayers;
 
-    private bool bPlayer1Collide = false;
-    private bool bPlayer2Collide = false;
-    private bool bPlayer3Collide = false;
-    private bool bPlayer4Collide = false;
+    private PlayerInput[] _playerInput;
 
     private void Start()
     {
         _playerInput = GameObject.FindObjectsOfType<PlayerInput>();
 
-        //AssignPlayerCollisionIndex();
+        // AssignPlayerCollisionIndex();
 
         if (_bAlwaysSearchForPlayers)
         {
             StartCoroutine(FindPlayers());
         }
-    }
-    
+    }   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         foreach (PlayerInput player in _playerInput)

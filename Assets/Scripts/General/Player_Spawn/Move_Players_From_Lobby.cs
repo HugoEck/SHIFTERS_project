@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class Move_Players_From_Lobby : MonoBehaviour
 {
-    private static Move_Players_From_Lobby _instance;
-    private static CinemachineTargetGroup[] targetGroups;
-    private static CinemachineVirtualCamera[] cameras;
+    private Move_Players_From_Lobby _instance;
+    private CinemachineTargetGroup[] targetGroups;
+    private CinemachineVirtualCamera[] cameras;
 
     private void Start()
     {

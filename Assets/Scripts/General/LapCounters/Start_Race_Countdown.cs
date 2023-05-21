@@ -20,10 +20,7 @@ public class Start_Race_Countdown : MonoBehaviour
     }
     private IEnumerator StartCountDown()
     {
-        //_countDownText.text = "4";
-        //
-        //yield return new WaitForSeconds(1f);
-
+        
         _countDownText.text = "3";
         
         yield return new WaitForSeconds(1f);

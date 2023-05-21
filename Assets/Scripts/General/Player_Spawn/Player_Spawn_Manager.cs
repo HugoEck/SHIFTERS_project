@@ -13,7 +13,7 @@ public class Player_Spawn_Manager : MonoBehaviour
 
     private PlayerInput[] _playerInputs;
 
-    private bool isCoroutineStarted = false;
+    private bool _bIsCoroutineStarted = false;
     
     private void Start()
     {
@@ -35,10 +35,10 @@ public class Player_Spawn_Manager : MonoBehaviour
         {
             _startGameText.enabled = true;
             _startGameText.text = "PRESS 'X' (KEYBOARD) OR 'START' (GAMEPAD) TO START THE GAME: " + _playerInputs.Length + "/4 players";
-            if (PlayerMovement.bIsGameStarted && !isCoroutineStarted)
+            if (PlayerMovement.bIsGameStarted && !_bIsCoroutineStarted)
             {
                 StartCoroutine(DisablePlayerInputForTime(2));
-                isCoroutineStarted = true;
+                _bIsCoroutineStarted = true;
                     
             }
         }

@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 0
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 0
@@ -150,7 +150,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 0
   _knockbackTotalTime: 0
-  inputMovement: {x: 0, y: 0}
   _newMaxSpeed: 20
   _newAccelerationForce: 25
   _newJumpForce: 800
@@ -168,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 0
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 0
@@ -181,7 +180,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 0
   _knockbackTotalTime: 0
-  inputMovement: {x: 0, y: 0}
   input: {fileID: 0}
   _wallSlidingSpeed: 3
 --- !u!96 &3994044877602057795
@@ -402,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 1
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -415,7 +413,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 0
   _knockbackTotalTime: 0
-  inputMovement: {x: 0, y: 0}
   input: {fileID: 227423477254909303}
   _wallSlidingSpeed: 3
 --- !u!114 &227423477242574394
@@ -431,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 0
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -444,7 +441,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 0
   _knockbackTotalTime: 0
-  inputMovement: {x: 0, y: 0}
   _newMaxSpeed: 10
   _newAccelerationForce: 15
   _newJumpForce: 800
@@ -712,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 1
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -725,7 +721,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 5
   _knockbackTotalTime: 0.28
-  inputMovement: {x: 0, y: 0}
 --- !u!114 &227423477254909302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +738,11 @@ MonoBehaviour:
   - {fileID: 227423477242574395}
   - {fileID: 227423477640983678}
   - {fileID: 227423477156398641}
+  _countdownTimer: 0
+  _cooldownTimer: 0
+  _isCooldownActive: 0
+  _isStarActive: 0
+  _isCountdownActive: 0
 --- !u!114 &227423477254909303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 0
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -1253,7 +1253,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 0
   _knockbackTotalTime: 0
-  inputMovement: {x: 0, y: 0}
   _newMaxSpeed: 15
   _newAccelerationForce: 20
   _newJumpForce: 600
@@ -1489,7 +1488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.05
-  m_AirControl: 0
+  _bCanAirControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -1502,7 +1501,6 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 227423477254909298}
   _knockbackForce: 0
   _knockbackTotalTime: 0
-  inputMovement: {x: 0, y: 0}
   _newMaxSpeed: 20
   _newAccelerationForce: 25
   _newJumpForce: 0
