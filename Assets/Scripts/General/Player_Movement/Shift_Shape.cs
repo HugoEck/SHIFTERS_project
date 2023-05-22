@@ -34,6 +34,7 @@ public class Shift_Shape : Shift_Shape_base
     public bool BShiftCircle { get; private set; }
     public bool BShiftTriangle { get; private set; }
     public bool BShiftStar { get; private set; }
+    public bool BChangedScene { get { return _changedScene; } }
     
     protected override void Start()
     {
@@ -105,8 +106,8 @@ public class Shift_Shape : Shift_Shape_base
         if (_bIsCountdownActive)
         {
             
-            _countdownTimer += Time.deltaTime;
-            if (_countdownTimer >= countdownDuration)
+            _countdownTimer -= Time.deltaTime;
+            if (_countdownTimer <= 0)
             {
                 _countdownTimer = 0f;
                 _bIsCountdownActive = false;
@@ -167,6 +168,7 @@ public class Shift_Shape : Shift_Shape_base
     protected override void Star()
     {
         ActivateShape(3, 2, 1, 0);
+        _countdownTimer = countdownDuration;
         currentShapeState.currentShapeState = Shape_Enum.ShapeState.Star;
     }
     protected override void Triangle()

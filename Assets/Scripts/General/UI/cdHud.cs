@@ -63,7 +63,7 @@ public class cdHud : MonoBehaviour
     [SerializeField] TextMeshProUGUI lapText2;
     [SerializeField] TextMeshProUGUI lapText3;
     #endregion
-
+    
     private void Start()
     {
         StartCoroutine(Cooldown());
@@ -156,17 +156,35 @@ public class cdHud : MonoBehaviour
                 {
                     image0.color = Color.red;
 
-                    image0.fillAmount += Time.deltaTime * (1f / 15f);
+                    image0.fillAmount += Time.deltaTime * (1f / Shift_Shape.cooldownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image0.fillAmount = 1;
+                        image0.color = Color.yellow;
+                    }
                 }
                 else if (_shiftShape.BIsCountdownActive == true)
                 {
                     image0.color = Color.yellow;
 
-                    image0.fillAmount -= Time.deltaTime * (1f / 5f);
+                    image0.fillAmount -= Time.deltaTime * (1f / Shift_Shape.countdownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image0.fillAmount = 1;
+                        image0.color = Color.yellow;
+                    }
                 }
                 else if (_shiftShape.CooldownTimer <= 0)
                 {
                     image0.color = Color.yellow;
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image0.fillAmount = 1;
+                        image0.color = Color.yellow;
+                    }
                 }
             }
             if (player.playerIndex == 1)
@@ -174,23 +192,42 @@ public class cdHud : MonoBehaviour
                 Shift_Shape _shiftShape = player.GetComponent<Shift_Shape>();
 
                 P1ImageShape();
-                P1Lapcounter();
+                P1Lapcounter();                
 
                 if (_shiftShape.BIsCooldownActive == true)
                 {
                     image1.color = Color.red;
 
-                    image1.fillAmount += Time.deltaTime * (1f / 15f);
+                    image1.fillAmount += Time.deltaTime * (1f / Shift_Shape.cooldownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image1.fillAmount = 1;
+                        image1.color = Color.yellow;
+                    }
+
                 }
                 else if (_shiftShape.BIsCountdownActive == true)
                 {
                     image1.color = Color.yellow;
 
-                    image1.fillAmount -= Time.deltaTime * (1f / 5f);
+                    image1.fillAmount -= Time.deltaTime * (1f / Shift_Shape.countdownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image1.fillAmount = 1;
+                        image1.color = Color.yellow;
+                    }
                 }
                 else if (_shiftShape.CooldownTimer <= 0)
                 {
                     image1.color = Color.yellow;
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image1.fillAmount = 1;
+                        image1.color = Color.yellow;
+                    }
                 }
             }
             if (player.playerIndex == 2)
@@ -198,23 +235,42 @@ public class cdHud : MonoBehaviour
                 Shift_Shape _shiftShape = player.GetComponent<Shift_Shape>();
 
                 P2ImageShape();
-                P2Lapcounter();
+                P2Lapcounter();               
 
                 if (_shiftShape.BIsCooldownActive == true)
                 {
                     image2.color = Color.red;
 
-                    image2.fillAmount += Time.deltaTime * (1f / 15f);
+                    image2.fillAmount += Time.deltaTime * (1f / Shift_Shape.cooldownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image2.fillAmount = 1;
+                        image2.color = Color.yellow;
+                    }
+
                 }
                 else if (_shiftShape.BIsCountdownActive == true)
                 {
                     image2.color = Color.yellow;
 
-                    image2.fillAmount -= Time.deltaTime * (1f / 5f);
+                    image2.fillAmount -= Time.deltaTime * (1f / Shift_Shape.countdownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image2.fillAmount = 1;
+                        image2.color = Color.yellow;
+                    }
                 }
                 else if (_shiftShape.CooldownTimer <= 0)
                 {
                     image2.color = Color.yellow;
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image2.fillAmount = 1;
+                        image2.color = Color.yellow;
+                    }
                 }
             }
             if (player.playerIndex == 3)
@@ -228,17 +284,35 @@ public class cdHud : MonoBehaviour
                 {
                     image3.color = Color.red;
 
-                    image3.fillAmount += Time.deltaTime * (1f / 15f);
+                    image3.fillAmount += Time.deltaTime * (1f / Shift_Shape.cooldownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image3.fillAmount = 1;
+                        image3.color = Color.yellow;
+                    }
                 }
                 else if (_shiftShape.BIsCountdownActive == true)
                 {
                     image3.color = Color.yellow;
 
-                    image3.fillAmount -= Time.deltaTime * (1f / 5f);
+                    image3.fillAmount -= Time.deltaTime * (1f / Shift_Shape.countdownDuration);
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image3.fillAmount = 1;
+                        image3.color = Color.yellow;
+                    }
                 }
                 else if (_shiftShape.CooldownTimer <= 0)
                 {
                     image3.color = Color.yellow;
+
+                    if (_shiftShape.BChangedScene)
+                    {
+                        image3.fillAmount = 1;
+                        image3.color = Color.yellow;
+                    }
                 }
             }
         }

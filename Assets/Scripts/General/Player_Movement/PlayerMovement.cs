@@ -231,21 +231,21 @@ public class PlayerMovement : CharacterController2D
 
     public virtual void OnJump(InputAction.CallbackContext context)
     {
-        if(_accessThisShape.currentShapeState.currentShapeState != Shape_Enum.ShapeState.Circle)
-        {
+        
+        
             _jumped = context.action.triggered;
             _wallJumping.HasJumped = context.action.triggered;
-        }
+        
         
     }
     
     public void OnSpaceJump(InputAction.CallbackContext context)
     {
-        if (_accessThisShape.currentShapeState.currentShapeState != Shape_Enum.ShapeState.Circle)
-        {
+        
+        
             _spaceJump = context.action.triggered;
             _wallJumping.HasJumped = context.action.triggered;
-        }        
+               
     }
 
     public void StartGame(InputAction.CallbackContext context)
