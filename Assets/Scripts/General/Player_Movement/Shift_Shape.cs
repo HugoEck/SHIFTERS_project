@@ -104,6 +104,7 @@ public class Shift_Shape : Shift_Shape_base
 
         if (_bIsCountdownActive)
         {
+            
             _countdownTimer += Time.deltaTime;
             if (_countdownTimer >= countdownDuration)
             {

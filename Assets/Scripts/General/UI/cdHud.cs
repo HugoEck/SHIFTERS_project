@@ -340,9 +340,9 @@ public class cdHud : MonoBehaviour
     {
         foreach (PlayerInput player in _playerInput)
         {
-            playerShapeSquare1.color = Color.blue;
-            playerShapeCircle1.color = Color.blue;
-            playerShapeTriangle1.color = Color.blue;
+            playerShapeSquare2.color = Color.blue;
+            playerShapeCircle2.color = Color.blue;
+            playerShapeTriangle2.color = Color.blue;
 
             if (player.playerIndex == 2)
             {
@@ -353,31 +353,31 @@ public class cdHud : MonoBehaviour
 
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Square)
                 {
-                    playerShapeSquare1.enabled = true;
-                    playerShapeCircle1.enabled = false;
-                    playerShapeTriangle1.enabled = false;
-                    playerShapeStar1.enabled = false;
+                    playerShapeSquare2.enabled = true;
+                    playerShapeCircle2.enabled = false;
+                    playerShapeTriangle2.enabled = false;
+                    playerShapeStar2.enabled = false;
                 }
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Circle)
                 {
-                    playerShapeSquare1.enabled = false;
-                    playerShapeCircle1.enabled = true;
-                    playerShapeTriangle1.enabled = false;
-                    playerShapeStar1.enabled = false;
+                    playerShapeSquare2.enabled = false;
+                    playerShapeCircle2.enabled = true;
+                    playerShapeTriangle2.enabled = false;
+                    playerShapeStar2.enabled = false;
                 }
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Triangle)
                 {
-                    playerShapeSquare1.enabled = false;
-                    playerShapeCircle1.enabled = false;
-                    playerShapeTriangle1.enabled = true;
-                    playerShapeStar1.enabled = false;
+                    playerShapeSquare2.enabled = false;
+                    playerShapeCircle2.enabled = false;
+                    playerShapeTriangle2.enabled = true;
+                    playerShapeStar2.enabled = false;
                 }
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Star && _shiftShape.BIsStarActive == true)
                 {
-                    playerShapeSquare1.enabled = false;
-                    playerShapeCircle1.enabled = false;
-                    playerShapeTriangle1.enabled = false;
-                    playerShapeStar1.enabled = true;
+                    playerShapeSquare2.enabled = false;
+                    playerShapeCircle2.enabled = false;
+                    playerShapeTriangle2.enabled = false;
+                    playerShapeStar2.enabled = true;
                 }
             }
         }
@@ -386,9 +386,9 @@ public class cdHud : MonoBehaviour
     {
         foreach (PlayerInput player in _playerInput)
         {
-            playerShapeSquare1.color = Color.yellow;
-            playerShapeCircle1.color = Color.yellow;
-            playerShapeTriangle1.color = Color.yellow;
+            playerShapeSquare3.color = Color.yellow;
+            playerShapeCircle3.color = Color.yellow;
+            playerShapeTriangle3.color = Color.yellow;
 
             if (player.playerIndex == 3)
             {
@@ -399,31 +399,31 @@ public class cdHud : MonoBehaviour
 
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Square)
                 {
-                    playerShapeSquare1.enabled = true;
-                    playerShapeCircle1.enabled = false;
-                    playerShapeTriangle1.enabled = false;
-                    playerShapeStar1.enabled = false;
+                    playerShapeSquare3.enabled = true;
+                    playerShapeCircle3.enabled = false;
+                    playerShapeTriangle3.enabled = false;
+                    playerShapeStar3.enabled = false;
                 }
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Circle)
                 {
-                    playerShapeSquare1.enabled = false;
-                    playerShapeCircle1.enabled = true;
-                    playerShapeTriangle1.enabled = false;
-                    playerShapeStar1.enabled = false;
+                    playerShapeSquare3.enabled = false;
+                    playerShapeCircle3.enabled = true;
+                    playerShapeTriangle3.enabled = false;
+                    playerShapeStar3.enabled = false;
                 }
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Triangle)
                 {
-                    playerShapeSquare1.enabled = false;
-                    playerShapeCircle1.enabled = false;
-                    playerShapeTriangle1.enabled = true;
-                    playerShapeStar1.enabled = false;
+                    playerShapeSquare3.enabled = false;
+                    playerShapeCircle3.enabled = false;
+                    playerShapeTriangle3.enabled = true;
+                    playerShapeStar3.enabled = false;
                 }
                 if (_shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Star && _shiftShape.BIsStarActive == true)
                 {
-                    playerShapeSquare1.enabled = false;
-                    playerShapeCircle1.enabled = false;
-                    playerShapeTriangle1.enabled = false;
-                    playerShapeStar1.enabled = true;
+                    playerShapeSquare3.enabled = false;
+                    playerShapeCircle3.enabled = false;
+                    playerShapeTriangle3.enabled = false;
+                    playerShapeStar3.enabled = true;
                 }
             }
         }

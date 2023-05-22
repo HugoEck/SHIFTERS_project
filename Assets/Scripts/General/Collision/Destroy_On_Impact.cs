@@ -49,113 +49,83 @@ public class Destroy_On_Impact : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
+    {
         // Check if the collision layer is included in the allowed collision layer mask
         if (((1 << collision.gameObject.layer) & _collisionLayer) != 0)
         {
-            
-            foreach (Shift_Shape shiftShape in _accessShapeEnums)
+            Shift_Shape shiftShape = collision.gameObject.GetComponent<Shift_Shape>();
+
+            if (collision.gameObject.CompareTag("Ground"))
             {
-                
-                foreach (GameObject playerObject in _playerList)
+                if (_bShouldDestroy && !_bHasAlreadyCollided)
                 {
-                    if (collision.gameObject.CompareTag("Ground"))
+                    _bBeingDestroyed = true;
+                    _currentDestroyObjectTimer = _startingDestroyObjectTimer;
+                    return;
+                }
+            }
+
+            if (shiftShape != null)
+            {
+                Shape_Enum.ShapeState shapeState = shiftShape.currentShapeState.currentShapeState;
+
+                if (shapeState == Shape_Enum.ShapeState.Triangle || shapeState == Shape_Enum.ShapeState.Star)
+                {
+                    GameObject otherPlayer = collision.gameObject;
+
+                    if (_bShouldDestroy && !_bHasAlreadyCollided)
                     {
-                        if (_bShouldDestroy && !_bHasAlreadyCollided)
-                        {
-                            _bBeingDestroyed = true;
-                            _currentDestroyObjectTimer = _startingDestroyObjectTimer;
-                            return;
-                        }
+                        _bBeingDestroyed = true;
+                        _currentDestroyObjectTimer = _startingDestroyObjectTimer;
                     }
 
-                    if (shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Triangle)
+                    _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
+                    FindObjectOfType<AudioManager>().Play("HIT");
+
+                    if (collision.transform.position.x <= gameObject.transform.position.x)
                     {
-                        if (shiftShape.gameObject == collision.gameObject)
-                        {
-                            _otherPlayer = collision.gameObject;
-                            if (_bShouldDestroy && !_bHasAlreadyCollided)
-                            {
-                                _bBeingDestroyed = true;
-                                _currentDestroyObjectTimer = _startingDestroyObjectTimer;
-                            }
-
-                            _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
-                            FindObjectOfType<AudioManager>().Play("HIT");
-
-                            if (collision.transform.position.x <= gameObject.transform.position.x)
-                            {
-                                _thisPlayer.KnockbackFromRight = true;                               
-                            }
-                            if (collision.transform.position.x > gameObject.transform.position.x)
-                            {
-                                _thisPlayer.KnockbackFromRight = false;                                
-                            }                            
-                            // Ignore collision between _thisPlayer and _otherPlayer
-                            Physics2D.IgnoreCollision(_thisPlayer.GetComponent<CircleCollider2D>(), _otherPlayer.GetComponent<CircleCollider2D>(), true);
-
-                             // Set a timer to turn off the collision ignoring after a certain amount of time
-                            StartCoroutine(ResetCollisionIgnore());                         
-                            return;                            
-                        }
+                        _thisPlayer.KnockbackFromRight = true;
                     }
-                    // If the other shape is a star that you collide with, you get the slowdown and knockback effect
-                    if (shiftShape.currentShapeState.currentShapeState == Shape_Enum.ShapeState.Star)
+                    if (collision.transform.position.x > gameObject.transform.position.x)
                     {
-                        if (shiftShape.gameObject == collision.gameObject)
-                        {
-                            _otherPlayer = collision.gameObject;
-                            if (_bShouldDestroy && !_bHasAlreadyCollided)
-                            {
-                                _bBeingDestroyed = true;
-                                _currentDestroyObjectTimer = _startingDestroyObjectTimer;
-                            }
+                        _thisPlayer.KnockbackFromRight = false;
+                    }
 
-                            _thisPlayer.KnockbackCounter = _thisPlayer.KnockbackTotalTime;
-                            FindObjectOfType<AudioManager>().Play("HIT");
+                    // Ignore collision between _thisPlayer and _otherPlayer
+                    Physics2D.IgnoreCollision(_thisPlayer.GetComponent<CircleCollider2D>(), otherPlayer.GetComponent<CircleCollider2D>(), true);
 
-                            if (collision.transform.position.x <= gameObject.transform.position.x)
-                            {
-                                _thisPlayer.KnockbackFromRight = true;
-                               
-                            }
-                            if (collision.transform.position.x > gameObject.transform.position.x)
-                            {
-                                _thisPlayer.KnockbackFromRight = false;                               
-                            }
-                            // Ignore collision between _thisPlayer and _otherPlayer
-                            Physics2D.IgnoreCollision(_thisPlayer.GetComponent<CircleCollider2D>(), _otherPlayer.GetComponent<CircleCollider2D>(), true);
-
-                            // Set a timer to turn off the collision ignoring after a certain amount of time
-                            StartCoroutine(ResetCollisionIgnore());
-                            return;                           
-                        }
-                        
-                    }                     
-                }                
+                    // Set a timer to turn off the collision ignoring after a certain amount of time
+                    StartCoroutine(ResetCollisionIgnore(otherPlayer));
+                }
             }
         }
-    }   
-    private IEnumerator ResetCollisionIgnore()
+    }
+
+
+    private IEnumerator ResetCollisionIgnore(GameObject otherPlayer)
     {
-        yield return new WaitForSeconds(2f); // Change this value to the desired amount of time
-        Physics2D.IgnoreCollision(_thisPlayer.GetComponent<Collider2D>(), _otherPlayer.GetComponent<Collider2D>(), false);
+        yield return new WaitForSeconds(6f); // Change this value to the desired amount of time
+        Physics2D.IgnoreCollision(_thisPlayer.GetComponent<Collider2D>(), otherPlayer.GetComponent<Collider2D>(), false);
     }
     private IEnumerator FindPlayers()
     {
         while (true)
         {
             _playerObjects.Clear();
+            _playerList.Clear();
 
             // Find all game objects with the tag "Player"
             GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Player");
             _playerList = objectsWithTag.ToList();
+
             // Filter the game objects based on whether they have the "Shift_Shape" script attached
             foreach (GameObject obj in objectsWithTag)
             {
                 if (obj == gameObject) continue; // skip current game object
+
                 PlayerMovement playerMovementValues = obj.GetComponent<PlayerMovement>();
                 Shift_Shape shiftShape = obj.GetComponent<Shift_Shape>();
+
                 if (shiftShape != null)
                 {
                     _playerObjects.Add(shiftShape);
@@ -172,4 +142,5 @@ public class Destroy_On_Impact : MonoBehaviour
             yield return new WaitForSeconds(1f); // update the list every 1 second
         }
     }
+
 }
