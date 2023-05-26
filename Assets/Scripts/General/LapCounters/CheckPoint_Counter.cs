@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CheckPoint_Counter : MonoBehaviour
 {
@@ -15,9 +16,15 @@ public class CheckPoint_Counter : MonoBehaviour
     public static int checkpointsPassedPlayer3 = 0;
     // Player 4
     public static int checkpointsPassedPlayer4 = 0;
+    
     void Start()
     {
         _playerInput = GameObject.FindObjectsOfType<PlayerInput>();
+
+        checkpointsPassedPlayer1 = 0;
+        checkpointsPassedPlayer2 = 0;
+        checkpointsPassedPlayer3 = 0;
+        checkpointsPassedPlayer4 = 0;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -47,5 +54,6 @@ public class CheckPoint_Counter : MonoBehaviour
                 }
             }
         }        
-    }   
+    }
+    
 }
